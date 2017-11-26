@@ -7,14 +7,33 @@
 
 <title>Pound Drever Hall Quantum Shot Noise Calculator</title>
 <body>
+<p>PDH quantum shot noise is a fundamental noise floor for laser measurements.</p>
+
+<h3>Pound-Drever-Hall Shot Noise $\left[ \dfrac{ \text{W}^2 }{ \text{Hz} } \right]$</h3>
+The equation for quantum PDH shot noise is
+\[ S(f) = 2 \hbar \omega_0 P_0 \left[J_0(\Gamma)^2 (1-\eta) +3 J_1(\Gamma)^2\right] \]
+where $\hbar$ is the reduced Planck's constant, $\omega_0$ is the carrier laser frequency, $P_0$ is the power incident on the photodetector, $J_0$ and $J_1$ are Bessel functions of the first kind, $\Gamma$ is the modulation depth, and $\eta$ is your Fabry-Perot cavity visibility.   
 
 <h2>Pound Drever Hall Quantum Shot Noise Calculator</h2>
-<p>Type a value in the Pounds field to convert the value to Kilograms:</p>
+
+<p>Type a values to the Incident Power, Modulation Depth, and Cavity Visibility fields to get a PDH Quantum Shot Noise estimate.</p>
 
 <p>
-  <label>Incident Power on the Photodiode $P_0$ in watts:</label>
-  <input id="inputPower" type="number" placeholder="Power" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
+    <label>Incident Power on the Photodiode $P_0$ in milliwatts:</label>
+    <input id="inputPower" type="number" step=0.01 min=0  placeholder="Power" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()"> 
+    <label>mW</label>
 </p>
+<p>
+    <label>Modulation Depth $\Gamma$:</label>
+    <input id="inputGamma" type="number" step=0.01 min=0 placeholder="Modulation Depth" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
+</p>
+<p>
+    <label>Cavity Visibility $\eta$:</label>
+    <input id="inputEta" type="number" step=0.01 min=0 max=1 placeholder="Cavity Visibility" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
+    <label>(between 0 and 1, visibility from the reflection port)</label>
+</p>
+
+<p>Laser Power: <span id="inputPower"></span> mW </p>
 <p>Shot Noise: <span id="outputShotNoise"></span> $ \dfrac{\text{W}^2}{\text{Hz}} $ </p>
 
 <script>
@@ -23,8 +42,11 @@ function shotNoiseConverter() {
     var hbar = 1.0545718e-34; /* Joule * seconds */
     var speedOfLight = 299792458.0; /* meters / second */
     var omega0 = 2*pi*speedOfLight/1.064e-6; /* meters */
-    var power = getQuantity("inputPower");
-    document.getElementById("outputShotNoise").innerHTML=2*hbar*omega0*power 
+    var power = parseFloat(getQuantity("inputPower"));
+    var gamma = parseFloat(getQuantity("inputGamma"));
+    var eta   = parseFloat(getQuantity("inputEta"));
+    document.getElementById("outputShotNoise").innerHTML=2*hbar*omega0*power*(1.0-eta) 
+    document.getElementById("inputPower").innerHTML=2*hbar*omega0*power*(1.0-eta) 
 }
 function getQuantity(formID) {
     //Get a reference to the TextBox
@@ -37,11 +59,6 @@ function getQuantity(formID) {
 return howmany;
 }
 </script>
-
-<h4>Pound-Drever-Hall Shot Noise $\left[ \dfrac{ \text{W}^2 }{ \text{Hz} } \right]$</h4>
-The equation for quantum PDH shot noise is
-\[ S(f) = 2 \hbar \omega_0 P_0 \left[J_0(\Gamma)^2 (1-\eta) +3 J_1(\Gamma)^2\right] \]
-where $\hbar$ is the reduced Planck's constant, $\omega_0$ is the carrier laser frequency, $P_0$ is the power incident on the photodetector, $J_0$ and $J_1$ are Bessel functions of the first kind, $\Gamma$ is the modulation depth, and $\eta$ is your Fabry-Perot cavity visibility.   
 
 <p>Created by Craig Cahillane, 2017 November 26</p>
 </body>

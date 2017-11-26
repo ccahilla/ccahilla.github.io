@@ -1,66 +1,89 @@
 <!DOCTYPE html>
-<html>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+        <script src="bessel.js"></script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+            $( document ).ready( shotNoiseConverter() );
+        </script>
+        <title>Shot Noise Calculator</title>
+    </head> 
+    <body>
+    <div class="container">
 
-<title>Pound Drever Hall Quantum Shot Noise Calculator</title>
-<body>
-<p>PDH quantum shot noise is a fundamental noise floor for laser measurements.</p>
+        <h3>Pound Drever Hall Quantum Shot Noise</h3>
+        <p>PDH quantum shot noise is a fundamental noise floor for laser measurements.</p><br>
+        <p>The equation for quantum PDH shot noise is</p>
+        <p>\[ S(f) = 2 \hbar \omega_0 P_0 \left[J_0(\Gamma)^2 (1-\eta) +3 J_1(\Gamma)^2\right] \]</p>
+        <p>where $\hbar$ is the reduced Planck's constant, $\omega_0$ is the carrier laser frequency, $P_0$ is the power incident on the photodetector, $J_0$ and $J_1$ are Bessel functions of the first kind, $\Gamma$ is the modulation depth, and $\eta$ is your Fabry-Perot cavity visibility from the reflection port. </p> 
+        <p>The shot noise PSD $S(f)$ is in units of power $\left[ \dfrac{ \text{W}^2 }{ \text{Hz} } \right]$</p>
 
-<h3>Pound-Drever-Hall Shot Noise $\left[ \dfrac{ \text{W}^2 }{ \text{Hz} } \right]$</h3>
-The equation for quantum PDH shot noise is
-\[ S(f) = 2 \hbar \omega_0 P_0 \left[J_0(\Gamma)^2 (1-\eta) +3 J_1(\Gamma)^2\right] \]
-where $\hbar$ is the reduced Planck's constant, $\omega_0$ is the carrier laser frequency, $P_0$ is the power incident on the photodetector, $J_0$ and $J_1$ are Bessel functions of the first kind, $\Gamma$ is the modulation depth, and $\eta$ is your Fabry-Perot cavity visibility.   
+        <h2>Pound Drever Hall Quantum Shot Noise Calculator</h2>
 
-<h2>Pound Drever Hall Quantum Shot Noise Calculator</h2>
+        <p>Type a values to the Incident Power, Modulation Depth, and Cavity Visibility fields to get a PDH Quantum Shot Noise estimate.</p>
 
-<p>Type a values to the Incident Power, Modulation Depth, and Cavity Visibility fields to get a PDH Quantum Shot Noise estimate.</p>
+        <p>
+            <label>Incident Power on the Photodiode $P_0$:</label>
+            <input id="inputPower" type="number" step=0.01 min=0 value=1.0 placeholder="Power" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()"> 
+            <label>mW</label>
+        </p>
+        <p>
+            <label>Laser Wavelength $\lambda = \frac{2 \pi c}{\omega_0}$:</label>
+            <input id="inputWavelength" type="number" step=0.01 min=0 value=1064.0 placeholder="Wavelength" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()"> 
+            <label>nm</label>
+        </p>
+        <p>
+            <label>Modulation Depth $\Gamma$:</label>
+            <input id="inputGamma" type="number" step=0.01 min=0 value=0.1 placeholder="Modulation Depth" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
+            <label>(between 0 and 1)</label>
+        </p>
+        <p>
+            <label>Cavity Visibility $\eta$:</label>
+            <input id="inputEta" type="number" step=0.01 min=0 max=1 value=0.0 placeholder="Cavity Visibility" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
+            <label>(between 0 and 1, visibility from the reflection port)</label>
+        </p>
 
-<p>
-    <label>Incident Power on the Photodiode $P_0$ in milliwatts:</label>
-    <input id="inputPower" type="number" step=0.01 min=0  placeholder="Power" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()"> 
-    <label>mW</label>
-</p>
-<p>
-    <label>Modulation Depth $\Gamma$:</label>
-    <input id="inputGamma" type="number" step=0.01 min=0 placeholder="Modulation Depth" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
-</p>
-<p>
-    <label>Cavity Visibility $\eta$:</label>
-    <input id="inputEta" type="number" step=0.01 min=0 max=1 placeholder="Cavity Visibility" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
-    <label>(between 0 and 1, visibility from the reflection port)</label>
-</p>
+        <p>
+            <label>Laser Frequency $\nu_0 = \frac{\omega_0}{2 \pi}$: <span id="outputFreq"></span> THz</label> 
+        </p>
+        <p>
+            <label>Shot Noise $S(f)$: <span id="outputShotNoise"></span> $ \dfrac{\text{W}^2}{\text{Hz}} $</label> 
+        </p>
 
-<p>Laser Power: <span id="inputPower"></span> mW </p>
-<p>Shot Noise: <span id="outputShotNoise"></span> $ \dfrac{\text{W}^2}{\text{Hz}} $ </p>
-
-<script>
-function shotNoiseConverter() {
-    var pi = 3.14159265359;
-    var hbar = 1.0545718e-34; /* Joule * seconds */
-    var speedOfLight = 299792458.0; /* meters / second */
-    var omega0 = 2*pi*speedOfLight/1.064e-6; /* meters */
-    var power = parseFloat(getQuantity("inputPower"));
-    var gamma = parseFloat(getQuantity("inputGamma"));
-    var eta   = parseFloat(getQuantity("inputEta"));
-    document.getElementById("outputShotNoise").innerHTML=2*hbar*omega0*power*(1.0-eta) 
-    document.getElementById("inputPower").innerHTML=2*hbar*omega0*power*(1.0-eta) 
-}
-function getQuantity(formID) {
-    //Get a reference to the TextBox
-    var quantity = document.getElementById(formID);
-    var howmany =0;
-    //If the textbox is not blank
-    if(quantity.value!="") {
-        howmany = parseInt(quantity.value);
-    }
-return howmany;
-}
-</script>
-
-<p>Created by Craig Cahillane, 2017 November 26</p>
-</body>
+        <script>
+            function shotNoiseConverter() {
+                var pi = 3.14159265359;
+                var hbar = 1.0545718e-34; /* Joule * seconds */
+                var speedOfLight = 299792458.0; /* meters / second */
+                var wavelength = getQuantity("inputWavelength")*1e-9; // take input from nanometer to meters
+                var omega0 = 2*pi*speedOfLight/wavelength; // rads
+                var nu0 = speedOfLight/wavelength; // Hz
+                var power = getQuantity("inputPower")*1e-3; // take input from mW to W
+                var gamma = getQuantity("inputGamma");
+                var eta   = getQuantity("inputEta");
+                var shotNoise = 2*hbar*omega0*power*(1.0-eta);
+                
+                document.getElementById("outputFreq").innerHTML=(nu0*1.0e-12).toPrecision(3);
+                document.getElementById("outputShotNoise").innerHTML=(shotNoise).toPrecision(3);
+            }
+            function getQuantity(formID) {
+                //Get a reference to the TextBox
+                var quantity = document.getElementById(formID);
+                var howmany =0;
+                //If the textbox is not blank
+                if(quantity.value!="") {
+                    howmany = parseFloat(quantity.value);
+                }
+                return howmany;
+            }
+        </script>
+        <p>Created by Craig Cahillane, 2017 November 26</p>
+        </div>
+    </body>
 </html>
-

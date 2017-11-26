@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+
+<title>Pound Drever Hall Quantum Shot Noise Calculator</title>
+<body>
+
+<h2>Pound Drever Hall Quantum Shot Noise Calculator</h2>
+<p>Type a value in the Pounds field to convert the value to Kilograms:</p>
+
+<p>
+  <label>Incident Power on the Photodiode $P_0$ in watts:</label>
+  <input id="inputPower" type="number" placeholder="Power" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
+</p>
+<p>Shot Noise: <span id="outputShotNoise"></span> $ \dfrac{\text{W}^2}{\text{Hz}} $ </p>
+
+<script>
+function shotNoiseConverter() {
+    var pi = 3.14159265359;
+    var hbar = 1.0545718e-34; /* Joule * seconds */
+    var speedOfLight = 299792458.0; /* meters / second */
+    var omega0 = 2*pi*speedOfLight/1.064e-6; /* meters */
+    var power = getQuantity("inputPower");
+    document.getElementById("outputShotNoise").innerHTML=2*hbar*omega0*power 
+}
+function getQuantity(formID) {
+    //Get a reference to the TextBox
+    var quantity = document.getElementById(formID);
+    var howmany =0;
+    //If the textbox is not blank
+    if(quantity.value!="") {
+        howmany = parseInt(quantity.value);
+    }
+return howmany;
+}
+</script>
+
+<h4>Pound-Drever-Hall Shot Noise $\left[ \dfrac{ \text{W}^2 }{ \text{Hz} } \right]$</h4>
+The equation for quantum PDH shot noise is
+\[ S(f) = 2 \hbar \omega_0 P_0 \left[J_0(\Gamma)^2 (1-\eta) +3 J_1(\Gamma)^2\right] \]
+where $\hbar$ is the reduced Planck's constant, $\omega_0$ is the carrier laser frequency, $P_0$ is the power incident on the photodetector, $J_0$ and $J_1$ are Bessel functions of the first kind, $\Gamma$ is the modulation depth, and $\eta$ is your Fabry-Perot cavity visibility.   
+
+<p>Created by Craig Cahillane, 2017 November 26</p>
+</body>
+</html>
+

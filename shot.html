@@ -9,9 +9,7 @@
         <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
         <script src="bessel.js"></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script>
-            $( document ).ready( shotNoiseConverter() );
-        </script>
+        
         <title>Shot Noise Calculator</title>
     </head> 
     <body>
@@ -40,22 +38,26 @@
         </p>
         <p>
             <label>Modulation Depth $\Gamma$:</label>
-            <input id="inputGamma" type="number" step=0.01 min=0 value=0.1 placeholder="Modulation Depth" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
-            <label>(between 0 and 1)</label>
+            <input id="inputGamma" type="number" step=0.01 min=0 value=0.05 placeholder="Modulation Depth" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
         </p>
         <p>
             <label>Cavity Visibility $\eta$:</label>
             <input id="inputEta" type="number" step=0.01 min=0 max=1 value=0.0 placeholder="Cavity Visibility" oninput="shotNoiseConverter()" onchange="shotNoiseConverter()">
             <label>(between 0 and 1, visibility from the reflection port)</label>
-        </p>
+        </p><br>
 
         <p>
             <label>Laser Frequency $\nu_0 = \frac{\omega_0}{2 \pi}$: <span id="outputFreq"></span> THz</label> 
         </p>
         <p>
+            <label>Bessel Function $J_0(\Gamma)$: <span id="outputBesselJ0"></span> </label> 
+        </p>
+        <p>
+            <label>Bessel Function $J_1(\Gamma)$: <span id="outputBesselJ1"></span> </label> 
+        </p>
+        <p>
             <label>Shot Noise $S(f)$: <span id="outputShotNoise"></span> $ \dfrac{\text{W}^2}{\text{Hz}} $</label> 
         </p>
-
         <script>
             function shotNoiseConverter() {
                 var pi = 3.14159265359;
@@ -67,9 +69,16 @@
                 var power = getQuantity("inputPower")*1e-3; // take input from mW to W
                 var gamma = getQuantity("inputGamma");
                 var eta   = getQuantity("inputEta");
-                var shotNoise = 2*hbar*omega0*power*(1.0-eta);
+
+                //var BESSEL = require('bessel');
+                var J0 = BESSEL.besselj(gamma, 0);
+                var J1 = BESSEL.besselj(gamma, 1);
+
+                var shotNoise = 2*hbar*omega0*power*( Math.pow(J0,2)*(1.0-eta) + 3*Math.pow(J1,2) );
                 
                 document.getElementById("outputFreq").innerHTML=(nu0*1.0e-12).toPrecision(3);
+                document.getElementById("outputBesselJ0").innerHTML=(J0).toPrecision(4); 
+                document.getElementById("outputBesselJ1").innerHTML=(J1).toPrecision(4);
                 document.getElementById("outputShotNoise").innerHTML=(shotNoise).toPrecision(3);
             }
             function getQuantity(formID) {
@@ -83,6 +92,7 @@
                 return howmany;
             }
         </script>
+
         <p>Created by Craig Cahillane, 2017 November 26</p>
         </div>
     </body>

@@ -2,142 +2,162 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>Canvas Lighting, Color, and Texture Effect</title>
-<style type="text/css">
-html, body {
-  width:  100%;
-  height: 100%;
-  margin: 0px;
- /* overflow: hidden; */
-}
-
-</style>
+    <meta charset="UTF-8">
+    <title>Fabry-Perot Optical Cavity</title>
+    <link rel="stylesheet" href="bootstrap_darkly.min.css">
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            /* overflow: hidden; */
+        }
+    </style>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+</head>
 
 <body>
-    
-<canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black"></canvas>
+    <div class="container">
+        <h1 class="text-center">Fabry-Perot Optical Cavity</h1>
+        <p>
+            A laser is incident on an optical cavity, i.e. two aligned optics. 
+            If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity.  
+            This constructive interference amplifies the laser power in the cavity.<br>
+            In LIGO, both four kilometer long arms consist of Fabry-Perot cavities.
+            When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked".
+            A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
+        </p> 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    
+        <!-- <input id="Mirror Position" type=range min=0 max=100 value=50 > -->
 
-<script type="text/javascript">
-    var c = document.getElementById('c'),
-        ctx = c.getContext('2d'),
-        cw = ctx.canvas.width  = window.innerWidth,
-        ch = ctx.canvas.height = window.innerHeight, 
-        cw = ctx.canvas.width,
-        ch = ctx.canvas.height,
-        points = [],
-        tick = 0,
-        opt = {
-            count: 300,
-            freq: 0.1,
-            wavenumber: 0.03,
-            amplitude: 15.0,
-            range: {
-                x1: 0,
-                x2: 1000,
-                y: 300
-            },
-            duration: {
-                min: 20,
-                max: 40
-            },
-            thickness: 5,
-            radius: 1,
-            strokeColor: '#990000',
-            level: 0.75,
-            curved: true
-        };
-        //rand = function(min, max){
-        //    return Math.floor( (Math.random() * (max - min + 1) ) + min);
-        //},
-        //ease = function (t, b, c, d) {
-        //    if ((t/=d/2) < 1) return c/2*t*t + b;
-        //    return -c/2 * ((--t)*(t-2) - 1) + b;
-        //};
+        <canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black">
+            This text is displayed if your browser does not support HTML5 canvas
+        </canvas>
 
-    ctx.lineJoin = 'round';
-    ctx.lineWidth = opt.thickness;
-    ctx.strokeStyle = opt.strokeColor;
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    var Point = function(config){
-        this.anchorX = config.x;
-        this.anchorY = config.y;
-        this.x = config.x;
-        this.y = config.y;
-    };
 
-    Point.prototype.update = function(){
-        this.y = this.anchorY + opt.amplitude * Math.sin(opt.freq * tick - opt.wavenumber * this.x);
-    };
-        
-    Point.prototype.render = function(){
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, opt.radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = '#000';
-        ctx.fill();
-    };
+        <script type="text/javascript">
+            var c = document.getElementById('c'),
+                ctx = c.getContext('2d'),
+                cw = ctx.canvas.width = window.innerWidth,
+                ch = ctx.canvas.height = window.innerHeight,
+                cw = ctx.canvas.width,
+                ch = ctx.canvas.height,
+                points = [],
+                tick = 0,
+                opt = {
+                    count: 400,
+                    freq: 0.1,
+                    wavenumber: 0.03,
+                    amplitude: 15.0,
+                    range: {
+                        x1: 0,
+                        x2: 1000,
+                        y: 300
+                    },
+                    duration: {
+                        min: 20,
+                        max: 40
+                    },
+                    thickness: 5,
+                    radius: 1,
+                    strokeColor: '#e50000',
+                    level: 0.61,
+                    curved: true
+                };
+            //rand = function(min, max){
+            //    return Math.floor( (Math.random() * (max - min + 1) ) + min);
+            //},
+            //ease = function (t, b, c, d) {
+            //    if ((t/=d/2) < 1) return c/2*t*t + b;
+            //    return -c/2 * ((--t)*(t-2) - 1) + b;
+            //};
 
-    var updatePoints = function(){
-      var i = points.length;
-      while(i--){
-        points[i].update();
-      }
-    };
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = opt.thickness;
+            ctx.strokeStyle = opt.strokeColor;
 
-    var renderPoints = function(){
-      var i = points.length;
-      while(i--){
-        points[i].render();
-      }
-    };
+            var Point = function(config) {
+                this.anchorX = config.x;
+                this.anchorY = config.y;
+                this.x = config.x;
+                this.y = config.y;
+            };
 
-    var renderShape = function(){
-      ctx.beginPath();
-      var pointCount = points.length;
-      ctx.moveTo(points[0].x, points[0].y);   
-      var i;
-      for (i = 0; i < pointCount - 1; i++) {
-        //var c = (points[i].x + points[i + 1].x) / 2;
-        //var d = (points[i].y + points[i + 1].y) / 2;
-        ctx.lineTo(points[i].x, points[i].y);
-      }
-      //ctx.lineTo(-opt.range.x - opt.thickness, ch + opt.thickness);
-      //ctx.lineTo(cw + opt.range.x + opt.thickness, ch + opt.thickness);
-      //ctx.closePath();   
-      //ctx.fillStyle = 'hsl('+(tick/2)+', 80%, 60%)';
-      //ctx.fill();  
-      ctx.stroke();
-    };
+            Point.prototype.update = function() {
+                this.y = this.anchorY + opt.amplitude * Math.sin(opt.freq * tick - opt.wavenumber * this.x);
+            };
 
-    var clear = function(){
-        ctx.clearRect(0, 0, cw, ch);
-    };
+            Point.prototype.render = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, opt.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#000';
+                ctx.fill();
+            };
 
-    var loop = function(){
-      window.requestAnimFrame(loop, c);
-      tick++;
-      clear();
-      updatePoints();
-      renderShape();
-      //renderPoints();
-    };
+            var updatePoints = function() {
+                var i = points.length;
+                while (i--) {
+                    points[i].update();
+                }
+            };
 
-    var i = opt.count;
-    var spacing = (opt.range.x2 - opt.range.x1) / opt.count;
-    while(i--){
-      points.push(new Point({
-        x: spacing * (i - 1) + opt.range.x1,
-        y: ch * opt.level
-      }));
-    }
+            var renderPoints = function() {
+                var i = points.length;
+                while (i--) {
+                    points[i].render();
+                }
+            };
 
-    window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
+            var renderShape = function() {
+                ctx.beginPath();
+                var pointCount = points.length;
+                ctx.moveTo(points[0].x, points[0].y);
+                var i;
+                for (i = 0; i < pointCount - 1; i++) {
+                    //var c = (points[i].x + points[i + 1].x) / 2;
+                    //var d = (points[i].y + points[i + 1].y) / 2;
+                    ctx.lineTo(points[i].x, points[i].y);
+                }
+                //ctx.lineTo(-opt.range.x - opt.thickness, ch + opt.thickness);
+                //ctx.lineTo(cw + opt.range.x + opt.thickness, ch + opt.thickness);
+                //ctx.closePath();   
+                //ctx.fillStyle = 'hsl('+(tick/2)+', 80%, 60%)';
+                //ctx.fill();  
+                ctx.stroke();
+            };
 
-    loop();
+            var clear = function() {
+                ctx.clearRect(0, 0, cw, ch);
+            };
 
-    </script>
-        
-    </body> 
+            var loop = function() {
+                window.requestAnimFrame(loop, c);
+                tick++;
+                clear();
+                updatePoints();
+                renderShape();
+                //renderPoints();
+            };
+
+            var i = opt.count;
+            var spacing = cw / opt.count;
+            while (i--) {
+                points.push(new Point({
+                    x: spacing * i,
+                    y: ch * opt.level
+                }));
+            }
+
+            window.requestAnimFrame = function() {
+                return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(a) {
+                    window.setTimeout(a, 1E3 / 60)
+                }
+            }();
+
+            loop();
+        </script>
+    </div>
+</body>

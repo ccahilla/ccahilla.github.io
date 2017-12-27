@@ -329,7 +329,33 @@
             };
 
             Point.prototype.update = function() {
-                // Define the Fabry-Perot electric field equation solutions
+                // incident light E0 going right and E0m going left 
+                var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * this.x});
+                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * this.x});
+                var E3 = math.multiply(E0m, E3h); 
+                var E1 = math.multiply(E0, E1h);
+                var E2 = math.multiply(E0m, E2h);
+                var E4 = math.multiply(E0, E4h);
+                
+                this.y = this.anchorY;                 
+                if (this.x < mirror1front) {
+                    this.y += math.add(E0, E3).re;
+                } else if (mirror1front <= this.x && this.x <= mirror2front ) {
+                    this.y += math.add(E1, E2).re;
+                } else {
+                    this.y += E4.re;       
+                }
+            };
+    
+            Point.prototype.render = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, opt.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#000';
+                ctx.fill();
+            };
+
+            var computeElectricFields = function() {
+               // Define the Fabry-Perot electric field equation solutions
                 var mirror1,
                     mirror2;
                 // draw all shapes
@@ -342,57 +368,40 @@
                         mirror2 = shape;
                     }
                 }                 
-                var mirror1front = mirror1.x + mirror1.w;
-                var mirror2front = mirror2.x; 
+                mirror1front = mirror1.x + mirror1.w;
+                mirror2front = mirror2.x; 
                 var dist = mirror2front - mirror1front;
                 
                 var r1 = opt.mirror1.refl;
                 var r2 = opt.mirror2.refl;
                 var t1 = Math.sqrt(1.0 - Math.pow(r1, 2));
                 var t2 = Math.sqrt(1.0 - Math.pow(r2, 2));
-                var k = opt.wavenumber    
 
-                this.y = this.anchorY 
-                // incident light E0 going right and E0m going left
-                var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * this.x});
-                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * this.x});
                 // common demoninator for FP transfer functions: 1 - r1*r2*e^(2*i*k*L)
-                var f = math.complex(1.0, 0);
-                var g = math.complex({r: -r1 * r2, phi: 2 * k * dist}); 
-                var denom = math.add(f, g);
+                var a0 = math.complex(1.0, 0);
+                var b0 = math.complex({r: -r1 * r2, phi: 2 * k * dist}); 
+                var denom = math.add(a0, b0);
                 
-                if (this.x < mirror1front) { // in front of the first mirror on the left
-                    var a = math.complex(r1, 0);
-                    var b = math.complex({r: -r2, phi: 2 * k * dist});
-                    var numer = math.add(a, b); 
-                    var E3 = math.multiply(E0m, math.divide(numer, denom)); 
-                    
-                    this.y += math.add(E0, E3).re;
-                } else if (mirror1front < this.x && this.x <= mirror2front ) {
-                    var a = math.complex({r: t1, phi: k * dist});
-                    var b = math.complex(0,1);
-                    var numer = math.multiply(b, a);
-                    var E1 = math.multiply(E0, math.divide(numer, denom));
-                    
-                    var m = math.complex({r: r2 * t1, phi: 2 * k * dist});
-                    var n = math.complex(0,1);
-                    numer = math.multiply(n, m);
-                    var E2 = math.multiply(E0m, math.divide(numer, denom));
-                    
-                    this.y += math.add(E1, E2).re;
-                } else {
-                    var numer = math.complex({r: -t1 * t2, phi: k * dist});
-                    var E4 = math.multiply(E0, math.divide(numer, denom));
-                    this.y += E4.re;       
-                }
-                document.getElementById("cavityLength").innerHTML = (dist).toPrecision(3); 
-            };
+                var a3 = math.complex(r1, 0);
+                var b3 = math.complex({r: -r2, phi: 2 * k * dist});
+                var numer3 = math.add(a3, b3); 
+                E3h = math.divide(numer3, denom);             
+        
+                var a1 = math.complex({r: t1, phi: k * dist});
+                var b1 = math.complex(0,1);
+                var numer1 = math.multiply(b1, a1);
+                E1h = math.divide(numer1, denom);
 
-            Point.prototype.render = function() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, opt.radius, 0, Math.PI * 2, false);
-                ctx.fillStyle = '#000';
-                ctx.fill();
+                var a2 = math.complex({r: r2 * t1, phi: 2 * k * dist});
+                var b2 = math.complex(0,1);
+                var numer2 = math.multiply(a2, b2);
+                E2h = math.divide(numer2, denom);
+                
+                var numer4 = math.complex({r: -t1 * t2, phi: k * dist});
+                E4h = math.divide(numer4, denom);                
+
+                document.getElementById("cavityLength").innerHTML = (dist).toPrecision(3); 
+ 
             };
 
             var updatePoints = function() {
@@ -428,6 +437,7 @@
                 //clear();
                 window.requestAnimFrame(loop, c);
                 tick++;
+                computeElectricFields();
                 updatePoints();
                 renderShape();
                 //renderPoints();
@@ -447,8 +457,12 @@
                     window.setTimeout(a, 1E3 / 60)
                 }
             }();
-            
+            // Create global CanvasState
             var s = new CanvasState(c);
+            // Create global electric fields
+            var E1h, E2h, E3h, E4h;
+            var mirror1front, mirror2front;
+            var k = opt.wavenumber; 
             init();
             loop();
         </script>

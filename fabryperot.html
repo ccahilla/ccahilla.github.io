@@ -14,6 +14,8 @@
             /* overflow: hidden; */
         }
     </style>
+    <script src="math.js" type="text/javascript"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
 </head>
 
@@ -21,23 +23,17 @@
     <div class="container">
         <h1 class="text-center">Fabry-Perot Optical Cavity</h1>
         <p>
-            A laser is incident on an optical cavity, i.e. two aligned optics. 
-            If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity.  
-            This constructive interference amplifies the laser power in the cavity.<br>
-            In LIGO, both four kilometer long arms consist of Fabry-Perot cavities.
-            When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked".
-            A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
-        </p> 
-
+            A laser is incident on an optical cavity, i.e. two aligned optics. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
+            <br> In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
+        </p>
+        <p> 
+            <label>Cavity Length $L$: <span id="cavityLength"></span></label> 
+        </p>
         <!-- <input id="Mirror Position" type=range min=0 max=100 value=50 > -->
-
         <canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black">
             This text is displayed if your browser does not support HTML5 canvas
         </canvas>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-
         <script type="text/javascript">
             var c = document.getElementById('c'),
                 ctx = c.getContext('2d'),
@@ -57,14 +53,31 @@
                         x2: 1000,
                         y: 300
                     },
+                    mirror1: {
+                        left: 0.25 * cw,
+                        right: 0.35 * cw,
+                        init: 0.3 * cw,
+                        width: 100,
+                        height: 225,
+                        refl: 0.7
+                    },
+                    mirror2: {
+                        left: 0.65 * cw,
+                        right: 0.75 * cw,
+                        init: 0.7 * cw,
+                        width: 100,
+                        height: 225,
+                        refl: 0.9
+                    },
                     duration: {
                         min: 20,
                         max: 40
                     },
-                    thickness: 5,
+                    thickness: 4,
                     radius: 1,
                     strokeColor: '#e50000',
                     level: 0.61,
+                    scaler: 1.3,
                     curved: true
                 };
             //rand = function(min, max){
@@ -79,6 +92,235 @@
             ctx.lineWidth = opt.thickness;
             ctx.strokeStyle = opt.strokeColor;
 
+            // Code copied from Simon Sarris
+            // www.simonsarris.com
+            // sarris@acm.org
+
+            // Constructor for Shape objects to hold data for all drawn objects.
+            // For now they will just be defined as rectangles.
+            function Shape(name, x, y, w, h, fill, xmin, xmax) {
+                // This is a very simple and unsafe constructor. All we're doing is checking if the values exist.
+                // "x || 0" just means "if there is a value for x, use that. Otherwise use 0."
+                // But we aren't checking anything else! We could put "Lalala" for the value of x 
+                this.name = name || 'rect';
+                this.x = x || 0;
+                this.y = y || 0;
+                this.w = w || 1;
+                this.h = h || 1;
+                this.fill = fill || '#AAAAAA';
+                this.xmin = xmin || 0;
+                this.xmax = xmax || 100;
+            }
+
+            // Draws this shape to a given context
+            Shape.prototype.draw = function(ctx) {
+                ctx.fillStyle = this.fill;
+                ctx.fillRect(this.x, this.y, this.w, this.h);
+            }
+
+            // Determine if a point is inside the shape's bounds
+            Shape.prototype.contains = function(mx, my) {
+                // All we have to do is make sure the Mouse X,Y fall in the area between
+                // the shape's X and (X + Width) and its Y and (Y + Height)
+                return (this.x <= mx) && (this.x + this.w >= mx) &&
+                    (this.y <= my) && (this.y + this.h >= my);
+            }
+
+            function CanvasState(canvas) {
+                // **** First some setup! ****
+                this.canvas = canvas;
+                this.width = canvas.width;
+                this.height = canvas.height;
+                this.ctx = canvas.getContext('2d');
+                // This complicates things a little but but fixes mouse co-ordinate problems
+                // when there's a border or padding. See getMouse for more detail
+                var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
+                if (document.defaultView && document.defaultView.getComputedStyle) {
+                    this.stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingLeft'], 10) || 0;
+                    this.stylePaddingTop = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingTop'], 10) || 0;
+                    this.styleBorderLeft = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderLeftWidth'], 10) || 0;
+                    this.styleBorderTop = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderTopWidth'], 10) || 0;
+                }
+                // Some pages have fixed-position bars (like the stumbleupon bar) at the top or left of the page
+                // They will mess up mouse coordinates and this fixes that
+                var html = document.body.parentNode;
+                this.htmlTop = html.offsetTop;
+                this.htmlLeft = html.offsetLeft;
+
+                // **** Keep track of state! ****
+
+                this.valid = false; // when set to false, the canvas will redraw everything
+                this.shapes = []; // the collection of things to be drawn
+                this.dragging = false; // Keep track of when we are dragging
+                // the current selected object. In the future we could turn this into an array for multiple selection
+                this.selection = null;
+                this.dragoffx = 0; // See mousedown and mousemove events for explanation
+                this.dragoffy = 0;
+
+                // **** Then events! ****
+
+                // This is an example of a closure!
+                // Right here "this" means the CanvasState. But we are making events on the Canvas itself,
+                // and when the events are fired on the canvas the variable "this" is going to mean the canvas!
+                // Since we still want to use this particular CanvasState in the events we have to save a reference to it.
+                // This is our reference!
+                var myState = this;
+
+                //fixes a problem where double clicking causes text to get selected on the canvas
+                canvas.addEventListener('selectstart', function(e) {
+                    e.preventDefault();
+                    return false;
+                }, false);
+                // Up, down, and move are for dragging
+                canvas.addEventListener('mousedown', function(e) {
+                    var mouse = myState.getMouse(e);
+                    var mx = opt.scaler * mouse.x;
+                    var my = opt.scaler * mouse.y;
+                    var shapes = myState.shapes;
+                    var l = shapes.length;
+                    for (var i = l - 1; i >= 0; i--) {
+                        if (shapes[i].contains(mx, my)) {
+                            var mySel = shapes[i];
+                            // Keep track of where in the object we clicked
+                            // so we can move it smoothly (see mousemove)
+                            myState.dragoffx = mx - mySel.x;
+                            myState.dragoffy = my - mySel.y;
+                            myState.dragging = true;
+                            myState.selection = mySel;
+                            myState.valid = false;
+                            return;
+                        }
+                    }
+                    // havent returned means we have failed to select anything.
+                    // If there was an object selected, we deselect it
+                    if (myState.selection) {
+                        myState.selection = null;
+                        myState.valid = false; // Need to clear the old selection border
+                    }
+                }, true);
+                canvas.addEventListener('mousemove', function(e) {
+                    if (myState.dragging) {
+                        var mouse = myState.getMouse(e);
+                        // We don't want to drag the object by its top-left corner, we want to drag it
+                        // from where we clicked. Thats why we saved the offset and use it here
+                        var currentX = opt.scaler * mouse.x - myState.dragoffx;
+                        if (currentX < myState.selection.xmin) {
+                            myState.selection.x = myState.selection.xmin;
+                        } else if (currentX >= myState.selection.xmax) {
+                            myState.selection.x = myState.selection.xmax;
+                        } else {                
+                            myState.selection.x = currentX;
+                        }
+                        //myState.selection.y = opt.scaler * mouse.y - myState.dragoffy;
+                        myState.valid = false; // Something's dragging so we must redraw
+                    }
+                }, true);
+                canvas.addEventListener('mouseup', function(e) {
+                    myState.dragging = false;
+                }, true);
+                // double click for making new shapes
+                //canvas.addEventListener('dblclick', function(e) {
+                //    var mouse = myState.getMouse(e);
+                //    myState.addShape(new Shape(mouse.x - 10, mouse.y - 10, 20, 20, 'rgba(0,255,0,.6)'));
+                //}, true);
+
+                // **** Options! ****
+
+                this.selectionColor = '#CC0000';
+                this.selectionWidth = 4;
+                this.interval = 15;
+                setInterval(function() {
+                    myState.draw();
+                }, myState.interval);
+            }
+
+            CanvasState.prototype.addShape = function(shape) {
+                this.shapes.push(shape);
+                this.valid = false;
+            }
+
+            CanvasState.prototype.clear = function() {
+                this.ctx.clearRect(0, 0, this.width, this.height);
+            }
+
+            // While draw is called as often as the INTERVAL variable demands,
+            // It only ever does something if the canvas gets invalidated by our code
+            CanvasState.prototype.draw = function() {
+                // if our state is invalid, redraw and validate!
+                //if (!this.valid) {
+                var ctx = this.ctx;
+                var shapes = this.shapes;
+                this.clear();
+
+                // ** Add stuff you want drawn in the background all the time here **
+
+                // draw all shapes
+                var l = shapes.length;
+                for (var i = 0; i < l; i++) {
+                    var shape = shapes[i];
+                    // We can skip the drawing of elements that have moved off the screen:
+                    if (shape.x > this.width || shape.y > this.height ||
+                        shape.x + shape.w < 0 || shape.y + shape.h < 0) continue;
+                    shapes[i].draw(ctx);
+                }
+
+                // draw selection
+                // right now this is just a stroke along the edge of the selected Shape
+                if (this.selection != null) {
+                    ctx.strokeStyle = this.selectionColor;
+                    ctx.lineWidth = this.selectionWidth;
+                    var mySel = this.selection;
+                    ctx.strokeRect(mySel.x, mySel.y, mySel.w, mySel.h);
+                }
+
+                // ** Add stuff you want drawn on top all the time here **
+
+                this.valid = true;
+                //}
+            }
+
+            // Creates an object with x and y defined, set to the mouse position relative to the state's canvas
+            // If you wanna be super-correct this can be tricky, we have to worry about padding and borders
+            CanvasState.prototype.getMouse = function(e) {
+                var element = this.canvas,
+                    offsetX = 0,
+                    offsetY = 0,
+                    mx, my;
+
+                // Compute the total offset
+                if (element.offsetParent !== undefined) {
+                    do {
+                        offsetX += element.offsetLeft;
+                        offsetY += element.offsetTop;
+                    } while ((element = element.offsetParent));
+                }
+
+                // Add padding and border style widths to offset
+                // Also add the <html> offsets in case there's a position:fixed bar
+                offsetX += this.stylePaddingLeft + this.styleBorderLeft + this.htmlLeft;
+                offsetY += this.stylePaddingTop + this.styleBorderTop + this.htmlTop;
+
+                mx = e.pageX - offsetX;
+                my = e.pageY - offsetY;
+
+                // We return a simple javascript object (a hash) with x and y defined
+                return {
+                    x: mx,
+                    y: my
+                };
+            }
+
+            // If you dont want to use <body onLoad='init()'>
+            // You could uncomment this init() reference and place the script reference inside the body tag
+            //init();
+
+            function init() {
+                s.addShape(new Shape('mirror1', opt.mirror1.init, ch * opt.level - opt.mirror1.height/2, opt.mirror1.width, 
+                                     opt.mirror1.height, 'rgba(135, 206, 250, .8)', opt.mirror1.left, opt.mirror1.right));
+                s.addShape(new Shape('mirror2', opt.mirror2.init, ch * opt.level - opt.mirror2.height/2, opt.mirror2.width, 
+                                     opt.mirror2.height, 'rgba(135, 206, 250, .8)', opt.mirror2.left, opt.mirror2.right));
+            }
+
             var Point = function(config) {
                 this.anchorX = config.x;
                 this.anchorY = config.y;
@@ -87,7 +329,42 @@
             };
 
             Point.prototype.update = function() {
-                this.y = this.anchorY + opt.amplitude * Math.sin(opt.freq * tick - opt.wavenumber * this.x);
+                // Define the Fabry-Perot electric field equation solutions
+                var mirror1,
+                    mirror2;
+                // draw all shapes
+                var l = s.shapes.length;
+                for (var i = 0; i < l; i++) {
+                    var shape = s.shapes[i];
+                    if (shape.name === 'mirror1') {
+                        mirror1 = shape;
+                    } else if (shape.name === 'mirror2') {
+                        mirror2 = shape;
+                    }
+                }                 
+                var mirror1front = mirror1.x + mirror1.w;
+                var mirror2front = mirror2.x; 
+                var dist = mirror2front - mirror1front;
+                
+                this.y = this.anchorY 
+                if (this.x < mirror1front) {
+                    var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - opt.wavenumber * this.x});
+                    
+                    var a = math.complex(opt.mirror1.refl, 0);
+                    var b = math.complex({r: -opt.mirror2.refl, phi: -2*(opt.freq*tick - opt.wavenumber*this.x)});
+                    var numer = math.add(a, b); 
+                    var f = math.complex(1.0, 0);
+                    var g = math.complex({r: -opt.mirror1.refl*opt.mirror2.refl, phi: -2*(opt.freq*tick - opt.wavenumber*this.x)}); 
+                    var denom = math.add(f, g);
+                    var E3 = math.multiply(E0, math.divide(numer, denom)); 
+                    this.y += math.add(E0, E3).re;
+                } else if (mirror1front < this.x && this.x <= mirror2front ) {
+                    
+                    
+                } else {
+
+                }
+                document.getElementById("cavityLength").innerHTML = (dist).toPrecision(3); 
             };
 
             Point.prototype.render = function() {
@@ -117,15 +394,8 @@
                 ctx.moveTo(points[0].x, points[0].y);
                 var i;
                 for (i = 0; i < pointCount - 1; i++) {
-                    //var c = (points[i].x + points[i + 1].x) / 2;
-                    //var d = (points[i].y + points[i + 1].y) / 2;
                     ctx.lineTo(points[i].x, points[i].y);
                 }
-                //ctx.lineTo(-opt.range.x - opt.thickness, ch + opt.thickness);
-                //ctx.lineTo(cw + opt.range.x + opt.thickness, ch + opt.thickness);
-                //ctx.closePath();   
-                //ctx.fillStyle = 'hsl('+(tick/2)+', 80%, 60%)';
-                //ctx.fill();  
                 ctx.stroke();
             };
 
@@ -134,9 +404,9 @@
             };
 
             var loop = function() {
+                //clear();
                 window.requestAnimFrame(loop, c);
                 tick++;
-                clear();
                 updatePoints();
                 renderShape();
                 //renderPoints();
@@ -156,7 +426,9 @@
                     window.setTimeout(a, 1E3 / 60)
                 }
             }();
-
+            
+            var s = new CanvasState(c);
+            init();
             loop();
         </script>
     </div>

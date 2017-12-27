@@ -346,23 +346,44 @@
                 var mirror2front = mirror2.x; 
                 var dist = mirror2front - mirror1front;
                 
+                var r1 = opt.mirror1.refl;
+                var r2 = opt.mirror2.refl;
+                var t1 = Math.sqrt(1.0 - Math.pow(r1, 2));
+                var t2 = Math.sqrt(1.0 - Math.pow(r2, 2));
+                var k = opt.wavenumber    
+
                 this.y = this.anchorY 
-                if (this.x < mirror1front) {
-                    var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - opt.wavenumber * this.x});
-                    
-                    var a = math.complex(opt.mirror1.refl, 0);
-                    var b = math.complex({r: -opt.mirror2.refl, phi: -2*(opt.freq*tick - opt.wavenumber*this.x)});
+                // incident light E0 going right and E0m going left
+                var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * this.x});
+                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * this.x});
+                // common demoninator for FP transfer functions: 1 - r1*r2*e^(2*i*k*L)
+                var f = math.complex(1.0, 0);
+                var g = math.complex({r: -r1 * r2, phi: 2 * k * dist}); 
+                var denom = math.add(f, g);
+                
+                if (this.x < mirror1front) { // in front of the first mirror on the left
+                    var a = math.complex(r1, 0);
+                    var b = math.complex({r: -r2, phi: 2 * k * dist});
                     var numer = math.add(a, b); 
-                    var f = math.complex(1.0, 0);
-                    var g = math.complex({r: -opt.mirror1.refl*opt.mirror2.refl, phi: -2*(opt.freq*tick - opt.wavenumber*this.x)}); 
-                    var denom = math.add(f, g);
-                    var E3 = math.multiply(E0, math.divide(numer, denom)); 
+                    var E3 = math.multiply(E0m, math.divide(numer, denom)); 
+                    
                     this.y += math.add(E0, E3).re;
                 } else if (mirror1front < this.x && this.x <= mirror2front ) {
+                    var a = math.complex({r: t1, phi: k * dist});
+                    var b = math.complex(0,1);
+                    var numer = math.multiply(b, a);
+                    var E1 = math.multiply(E0, math.divide(numer, denom));
                     
+                    var m = math.complex({r: r2 * t1, phi: 2 * k * dist});
+                    var n = math.complex(0,1);
+                    numer = math.multiply(n, m);
+                    var E2 = math.multiply(E0m, math.divide(numer, denom));
                     
+                    this.y += math.add(E1, E2).re;
                 } else {
-
+                    var numer = math.complex({r: -t1 * t2, phi: k * dist});
+                    var E4 = math.multiply(E0, math.divide(numer, denom));
+                    this.y += E4.re;       
                 }
                 document.getElementById("cavityLength").innerHTML = (dist).toPrecision(3); 
             };

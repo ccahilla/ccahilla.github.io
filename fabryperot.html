@@ -30,20 +30,20 @@
              Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
         </h4>
         <p class="text-center">
-            The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.
+            The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.  Light is reflected off the cavity $E_\mathrm{refl}$ is used in PDH locking.
         </p>
         <p class="text-center"> 
             <label id="cavityLengthText">Cavity Length $L$:&nbsp; <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
             <label id="wavenumberText">Wavenumber $k = \dfrac{2 \pi}{\lambda}$:&nbsp; <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
-            <label id="phaseText">Phase $\phi = 2 k L \, \mathrm{mod}\, 2\pi$:&nbsp; <span id="laserPhase"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+            <label id="phaseText">Phase $\phi = 2 k L \,\, \mathrm{mod}\,\, 2\pi$:&nbsp; <span id="laserPhase"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
             <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="opticalGain"</span></label>
         </p>
         <p id="bothMirrorRefl" class="text-center">
-            <label id="mirrorOneText">Mirror One Reflectivity $r_1$:&nbsp; <span id="mirror1refl"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;
+            <label id="mirrorOneText">Mirror One Reflectivity $r_1$:&nbsp; <span id="mirror1refl"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label id="mirrorTwoText">Mirror Two Reflectivity $r_2$:&nbsp; <span id="mirror2refl"></span></label>
         </p>
         <p class="text-center">
-            <input id="MirrorOneReflectivity" type=range min=0 max=1.0 step=0.01 value=0.7 > &nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="MirrorOneReflectivity" type=range min=0 max=1.0 step=0.01 value=0.7 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="MirrorTwoReflectivity" type=range min=0 max=1.0 step=0.01 value=0.9 >
         </p>
         <canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black">
@@ -106,7 +106,7 @@
                 opt = {
                     count: 400,
                     freq: 2.0 * Math.PI * 0.01,
-                    wavenumber: 2.0 * Math.PI * 0.005,
+                    wavenumber: 2.0 * Math.PI / 200.0,
                     amplitude: 15.0,
                     range: {
                         x1: 0,
@@ -427,14 +427,14 @@
                 mirror2front = mirror2.x; 
                 var dist = mirror2front - mirror1front;
                 
-                // common demoninator for FP transfer functions: 1 - r1*r2*e^(2*i*k*L)
+                // common demoninator for FP transfer functions: 1 - r1*r2*e^(i*2*k*L)
                 var a0 = math.complex(1.0, 0);
-                var b0 = math.complex({r: -r1 * r2, phi: 2 * k * dist}); 
+                var b0 = math.complex({r: -r1 * r2, phi: 2.0 * k * dist}); 
                 var denom = math.add(a0, b0);
                 
                 // REFL
                 var a3 = math.complex(-r1, 0);
-                var b3 = math.complex({r: r2, phi: 2 * k * dist});
+                var b3 = math.complex({r: r2, phi: 2.0 * k * dist});
                 var numer3 = math.add(a3, b3); 
                 E3h = math.divide(numer3, denom);             
         
@@ -443,14 +443,14 @@
                 E1h = math.divide(numer1, denom);
 
                 // CAV LEFT
-                var numer2 = math.complex({r: r2 * t1, phi: 2 * k * dist});
+                var numer2 = math.complex({r: r2 * t1, phi: 2.0 * k * dist});
                 E2h = math.divide(numer2, denom);
                
                 // TRANS 
                 var numer4 = math.complex({r: t1 * t2, phi: k * dist});
                 E4h = math.divide(numer4, denom);                
 
-                var optGain = math.divide(1, denom).abs();
+                var optGain = math.divide(1.0, denom).abs();
                 var phase = 2.0 * k * dist % 2.0 * Math.PI; // removed Math.PI from phase and modulation
 
                 document.getElementById("cavityLength").innerHTML = (dist).toPrecision(4); 

@@ -21,27 +21,28 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center">Fabry-Perot Optical Cavity</h1>
+        <h1 id="titleText" class="text-center">Fabry-Perot Optical Cavity</h1>
         <p>
             A laser is incident on an optical cavity, i.e. two aligned optics. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
             <br> In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
         </p>
-        <h4>
+        <h4 id="headerText" class="text-center">
              Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
         </h4>
-        <p> 
-            <label>Cavity Length $L$: <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; 
-            <label>Wavenumber $k = \dfrac{2 \pi}{\lambda}$: <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; 
-            <label>Phase $\phi = 2 k L \, \mathrm{mod}\, 2\pi$: <span id="laserPhase"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; 
-            <label>Optical Gain $\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}} = \dfrac{1}{1 - r_1 r_2 e^{2 i k L}}$: <span id="opticalGain"</span></label>
+        <p class="text-center"> 
+            <label id="cavityLengthText">Cavity Length $L$:&nbsp; <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label id="wavenumberText">Wavenumber $k = \dfrac{2 \pi}{\lambda}$:&nbsp; <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label id="phaseText">Phase $\phi = 2 k L \, \mathrm{mod}\, 2\pi$:&nbsp; <span id="laserPhase"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+            <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span id="opticalGain"</span></label>
         </p>
-        <input id="MirrorOneReflectivity" type=range min=0 max=1.0 step=0.01 value=0.7 > &nbsp;&nbsp;&nbsp;&nbsp;
-        <input id="MirrorTwoReflectivity" type=range min=0 max=1.0 step=0.01 value=0.9 >
-        <p>
-            Mirror One Reflectivity : <span id="mirror1refl"></span> &nbsp;&nbsp;&nbsp;&nbsp;
-            Mirror Two Reflectivity : <span id="mirror2refl"></span>
+        <p id="bothMirrorRefl" class="text-center">
+            <label id="mirrorOneText">Mirror One Reflectivity $r_1$:&nbsp; <span id="mirror1refl"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;
+            <label id="mirrorTwoText">Mirror Two Reflectivity $r_2$:&nbsp; <span id="mirror2refl"></span></label>
         </p>
-
+        <p class="text-center">
+            <input id="MirrorOneReflectivity" type=range min=0 max=1.0 step=0.01 value=0.7 > &nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="MirrorTwoReflectivity" type=range min=0 max=1.0 step=0.01 value=0.9 >
+        </p>
         <canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black">
             This text is displayed if your browser does not support HTML5 canvas
         </canvas>
@@ -55,7 +56,18 @@
                 }
                 return str;
             };
-
+            
+            // Color computed text
+            document.getElementById("titleText").style.color = '#FF9999'; 
+            document.getElementById("headerText").style.color = '#FF9999'; 
+            document.getElementById("cavityLengthText").style.color = '#99CCFF';
+            document.getElementById("wavenumberText").style.color = '#99CCFF';
+            document.getElementById("phaseText").style.color = '#99CCFF';
+            document.getElementById("opticalGainText").style.color = '#99CCFF';
+            document.getElementById("mirrorOneText").style.color = '#FFDD99';
+            document.getElementById("mirrorTwoText").style.color = '#FFDD99';
+            
+            
             // Sliders 
             var slider1 = document.getElementById("MirrorOneReflectivity");
             var slider2 = document.getElementById("MirrorTwoReflectivity");
@@ -89,9 +101,9 @@
                 points = [],
                 tick = 0,
                 opt = {
-                    count: 300,
-                    freq: 0.03,
-                    wavenumber: 0.01,
+                    count: 400,
+                    freq: 2.0 * Math.PI * 0.003,
+                    wavenumber: 2.0 * Math.PI * 0.001,
                     amplitude: 15.0,
                     range: {
                         x1: 0,
@@ -370,8 +382,8 @@
 
             Point.prototype.update = function() {
                 // incident light E0 going right and E0m going left 
-                var E0 = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick - k * this.x)});
-                var E0m = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick + k * this.x)});
+                var E0 = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick - k * (this.x - mirror1front))});
+                var E0m = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick + k * (this.x - mirror1front))});
                 var E3 = math.multiply(E0m, E3h); // refl 
                 var E1 = math.multiply(E0, E1h);  // cavity right
                 var E2 = math.multiply(E0m, E2h); // cavity left
@@ -383,7 +395,7 @@
                 } else if (mirror1front <= this.x && this.x < mirror2front ) {
                     this.y += math.add(E1, E2).re;
                 } else {
-                    this.y += E4.re;       
+                    this.y += E4.re; 
                 }
             };
     
@@ -414,35 +426,34 @@
                 
                 // common demoninator for FP transfer functions: 1 - r1*r2*e^(2*i*k*L)
                 var a0 = math.complex(1.0, 0);
-                var b0 = math.complex({r: -r1 * r2, phi: 2 * Math.PI * k * dist}); 
+                var b0 = math.complex({r: -r1 * r2, phi: 2 * k * dist}); 
                 var denom = math.add(a0, b0);
                 
-                var a3 = math.complex(r1, 0);
-                var b3 = math.complex({r: -r2, phi: 2 * Math.PI * k * dist});
+                // REFL
+                var a3 = math.complex(-r1, 0);
+                var b3 = math.complex({r: r2, phi: 2 * k * dist});
                 var numer3 = math.add(a3, b3); 
                 E3h = math.divide(numer3, denom);             
         
-                var a1 = math.complex({r: t1, phi: Math.PI * k * dist});
-                var b1 = math.complex(0,1);
-                var numer1 = math.multiply(b1, a1);
+                // CAV RIGHT
+                var numer1 = math.complex({r: t1, phi: k * dist});
                 E1h = math.divide(numer1, denom);
 
-                var a2 = math.complex({r: r2 * t1, phi: 2 * Math.PI * k * dist});
-                var b2 = math.complex(0,1);
-                var numer2 = math.multiply(a2, b2);
+                // CAV LEFT
+                var numer2 = math.complex({r: r2 * t1, phi: 2 * k * dist});
                 E2h = math.divide(numer2, denom);
-                
-                var numer4 = math.complex({r: -t1 * t2, phi: Math.PI * k * dist});
+               
+                // TRANS 
+                var numer4 = math.complex({r: t1 * t2, phi: k * dist});
                 E4h = math.divide(numer4, denom);                
 
                 var optGain = math.divide(1, denom).abs();
-                var phase = 2.0 * Math.PI * k * dist % 2.0 * Math.PI; // removed Math.PI from phase and modulation
+                var phase = 2.0 * k * dist % 2.0 * Math.PI; // removed Math.PI from phase and modulation
 
                 document.getElementById("cavityLength").innerHTML = (dist).toPrecision(4); 
                 document.getElementById("opticalGain").innerHTML = (optGain).toPrecision(3); 
                 document.getElementById("laserWavenumber").innerHTML = (k).toPrecision(3); 
-                document.getElementById("laserPhase").innerHTML = (phase).toPrecision(4); 
- 
+                document.getElementById("laserPhase").innerHTML = (phase).toPrecision(4);  
             };
 
             var updatePoints = function() {

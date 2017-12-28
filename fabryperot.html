@@ -26,27 +26,72 @@
             A laser is incident on an optical cavity, i.e. two aligned optics. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
             <br> In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
         </p>
+        <h4>
+             Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
+        </h4>
         <p> 
-            <label>Cavity Length $L$: <span id="cavityLength"></span></label> 
+            <label>Cavity Length $L$: <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label>Wavenumber $k = \dfrac{2 \pi}{\lambda}$: <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label>Phase $\phi = 2 k L \, \mathrm{mod}\, 2\pi$: <span id="laserPhase"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label>Optical Gain $\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}} = \dfrac{1}{1 - r_1 r_2 e^{2 i k L}}$: <span id="opticalGain"</span></label>
         </p>
-        <!-- <input id="Mirror Position" type=range min=0 max=100 value=50 > -->
+        <input id="MirrorOneReflectivity" type=range min=0 max=1.0 step=0.01 value=0.7 > &nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="MirrorTwoReflectivity" type=range min=0 max=1.0 step=0.01 value=0.9 >
+        <p>
+            Mirror One Reflectivity : <span id="mirror1refl"></span> &nbsp;&nbsp;&nbsp;&nbsp;
+            Mirror Two Reflectivity : <span id="mirror2refl"></span>
+        </p>
+
         <canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black">
             This text is displayed if your browser does not support HTML5 canvas
         </canvas>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script type="text/javascript">
+            String.prototype.format = String.prototype.f = function() {
+                var str = this,
+                    i = arguments.length;
+                while (i--) {
+                    str = str.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+                }
+                return str;
+            };
+
+            // Sliders 
+            var slider1 = document.getElementById("MirrorOneReflectivity");
+            var slider2 = document.getElementById("MirrorTwoReflectivity");
+            var output1 = document.getElementById("mirror1refl");
+            var output2 = document.getElementById("mirror2refl");
+            output1.innerHTML = slider1.value;
+            output2.innerHTML = slider2.value;
+            
+            var r1 = slider1.defaultValue; 
+            var r2 = slider2.defaultValue; 
+            var t1 = Math.sqrt(1.0 - Math.pow(r1, 2)); 
+            var t2 = Math.sqrt(1.0 - Math.pow(r2, 2)); // define reflectivities and transmissions
+
+            slider1.oninput = function() {
+                output1.innerHTML = this.value;
+                r1 = this.value;
+                t1 = Math.sqrt(1.0 - Math.pow(r1, 2));
+            }
+            slider2.oninput = function() {
+                output2.innerHTML = this.value;
+                r2 = this.value;
+                t2 = Math.sqrt(1.0 - Math.pow(r2, 2));            
+            }
+            
             var c = document.getElementById('c'),
                 ctx = c.getContext('2d'),
                 cw = ctx.canvas.width = window.innerWidth,
                 ch = ctx.canvas.height = window.innerHeight,
-                cw = ctx.canvas.width,
-                ch = ctx.canvas.height,
+                //cw = ctx.canvas.width,
+                //ch = ctx.canvas.height,
                 points = [],
                 tick = 0,
                 opt = {
-                    count: 400,
-                    freq: 0.1,
-                    wavenumber: 0.03,
+                    count: 300,
+                    freq: 0.03,
+                    wavenumber: 0.01,
                     amplitude: 15.0,
                     range: {
                         x1: 0,
@@ -54,16 +99,16 @@
                         y: 300
                     },
                     mirror1: {
-                        left: 0.25 * cw,
-                        right: 0.35 * cw,
+                        left: 0.2 * cw,
+                        right: 0.4 * cw,
                         init: 0.3 * cw,
                         width: 100,
                         height: 225,
                         refl: 0.7
                     },
                     mirror2: {
-                        left: 0.65 * cw,
-                        right: 0.75 * cw,
+                        left: 0.6 * cw,
+                        right: 0.8 * cw,
                         init: 0.7 * cw,
                         width: 100,
                         height: 225,
@@ -80,13 +125,6 @@
                     scaler: 1.3,
                     curved: true
                 };
-            //rand = function(min, max){
-            //    return Math.floor( (Math.random() * (max - min + 1) ) + min);
-            //},
-            //ease = function (t, b, c, d) {
-            //    if ((t/=d/2) < 1) return c/2*t*t + b;
-            //    return -c/2 * ((--t)*(t-2) - 1) + b;
-            //};
 
             ctx.lineJoin = 'round';
             ctx.lineWidth = opt.thickness;
@@ -315,10 +353,12 @@
             //init();
 
             function init() {
+                colorStr1 = 'rgba(135, 206, 250, {0})'.format(r1);
+                colorStr2 = 'rgba(135, 206, 250, {0})'.format(r2);
                 s.addShape(new Shape('mirror1', opt.mirror1.init, ch * opt.level - opt.mirror1.height/2, opt.mirror1.width, 
-                                     opt.mirror1.height, 'rgba(135, 206, 250, .8)', opt.mirror1.left, opt.mirror1.right));
+                                     opt.mirror1.height, colorStr1, opt.mirror1.left, opt.mirror1.right));
                 s.addShape(new Shape('mirror2', opt.mirror2.init, ch * opt.level - opt.mirror2.height/2, opt.mirror2.width, 
-                                     opt.mirror2.height, 'rgba(135, 206, 250, .8)', opt.mirror2.left, opt.mirror2.right));
+                                     opt.mirror2.height, colorStr2, opt.mirror2.left, opt.mirror2.right));
             }
 
             var Point = function(config) {
@@ -330,17 +370,17 @@
 
             Point.prototype.update = function() {
                 // incident light E0 going right and E0m going left 
-                var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * this.x});
-                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * this.x});
-                var E3 = math.multiply(E0m, E3h); 
-                var E1 = math.multiply(E0, E1h);
-                var E2 = math.multiply(E0m, E2h);
-                var E4 = math.multiply(E0, E4h);
+                var E0 = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick - k * this.x)});
+                var E0m = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick + k * this.x)});
+                var E3 = math.multiply(E0m, E3h); // refl 
+                var E1 = math.multiply(E0, E1h);  // cavity right
+                var E2 = math.multiply(E0m, E2h); // cavity left
+                var E4 = math.multiply(E0, E4h);  // trans
                 
                 this.y = this.anchorY;                 
                 if (this.x < mirror1front) {
                     this.y += math.add(E0, E3).re;
-                } else if (mirror1front <= this.x && this.x <= mirror2front ) {
+                } else if (mirror1front <= this.x && this.x < mirror2front ) {
                     this.y += math.add(E1, E2).re;
                 } else {
                     this.y += E4.re;       
@@ -372,35 +412,36 @@
                 mirror2front = mirror2.x; 
                 var dist = mirror2front - mirror1front;
                 
-                var r1 = opt.mirror1.refl;
-                var r2 = opt.mirror2.refl;
-                var t1 = Math.sqrt(1.0 - Math.pow(r1, 2));
-                var t2 = Math.sqrt(1.0 - Math.pow(r2, 2));
-
                 // common demoninator for FP transfer functions: 1 - r1*r2*e^(2*i*k*L)
                 var a0 = math.complex(1.0, 0);
-                var b0 = math.complex({r: -r1 * r2, phi: 2 * k * dist}); 
+                var b0 = math.complex({r: -r1 * r2, phi: 2 * Math.PI * k * dist}); 
                 var denom = math.add(a0, b0);
                 
                 var a3 = math.complex(r1, 0);
-                var b3 = math.complex({r: -r2, phi: 2 * k * dist});
+                var b3 = math.complex({r: -r2, phi: 2 * Math.PI * k * dist});
                 var numer3 = math.add(a3, b3); 
                 E3h = math.divide(numer3, denom);             
         
-                var a1 = math.complex({r: t1, phi: k * dist});
+                var a1 = math.complex({r: t1, phi: Math.PI * k * dist});
                 var b1 = math.complex(0,1);
                 var numer1 = math.multiply(b1, a1);
                 E1h = math.divide(numer1, denom);
 
-                var a2 = math.complex({r: r2 * t1, phi: 2 * k * dist});
+                var a2 = math.complex({r: r2 * t1, phi: 2 * Math.PI * k * dist});
                 var b2 = math.complex(0,1);
                 var numer2 = math.multiply(a2, b2);
                 E2h = math.divide(numer2, denom);
                 
-                var numer4 = math.complex({r: -t1 * t2, phi: k * dist});
+                var numer4 = math.complex({r: -t1 * t2, phi: Math.PI * k * dist});
                 E4h = math.divide(numer4, denom);                
 
-                document.getElementById("cavityLength").innerHTML = (dist).toPrecision(3); 
+                var optGain = math.divide(1, denom).abs();
+                var phase = 2.0 * Math.PI * k * dist % 2.0 * Math.PI; // removed Math.PI from phase and modulation
+
+                document.getElementById("cavityLength").innerHTML = (dist).toPrecision(4); 
+                document.getElementById("opticalGain").innerHTML = (optGain).toPrecision(3); 
+                document.getElementById("laserWavenumber").innerHTML = (k).toPrecision(3); 
+                document.getElementById("laserPhase").innerHTML = (phase).toPrecision(4); 
  
             };
 

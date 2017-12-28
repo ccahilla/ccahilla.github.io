@@ -29,11 +29,14 @@
         <h4 id="headerText" class="text-center">
              Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
         </h4>
+        <p class="text-center">
+            The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.
+        </p>
         <p class="text-center"> 
             <label id="cavityLengthText">Cavity Length $L$:&nbsp; <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
             <label id="wavenumberText">Wavenumber $k = \dfrac{2 \pi}{\lambda}$:&nbsp; <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
             <label id="phaseText">Phase $\phi = 2 k L \, \mathrm{mod}\, 2\pi$:&nbsp; <span id="laserPhase"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-            <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span id="opticalGain"</span></label>
+            <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="opticalGain"</span></label>
         </p>
         <p id="bothMirrorRefl" class="text-center">
             <label id="mirrorOneText">Mirror One Reflectivity $r_1$:&nbsp; <span id="mirror1refl"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,8 +105,8 @@
                 tick = 0,
                 opt = {
                     count: 400,
-                    freq: 2.0 * Math.PI * 0.003,
-                    wavenumber: 2.0 * Math.PI * 0.001,
+                    freq: 2.0 * Math.PI * 0.01,
+                    wavenumber: 2.0 * Math.PI * 0.005,
                     amplitude: 15.0,
                     range: {
                         x1: 0,
@@ -382,8 +385,8 @@
 
             Point.prototype.update = function() {
                 // incident light E0 going right and E0m going left 
-                var E0 = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick - k * (this.x - mirror1front))});
-                var E0m = math.complex({r: opt.amplitude, phi: Math.PI * (opt.freq * tick + k * (this.x - mirror1front))});
+                var E0 = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * (this.x - mirror1front)});
+                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * (this.x - mirror1front)});
                 var E3 = math.multiply(E0m, E3h); // refl 
                 var E1 = math.multiply(E0, E1h);  // cavity right
                 var E2 = math.multiply(E0m, E2h); // cavity left

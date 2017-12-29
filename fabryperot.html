@@ -75,7 +75,7 @@
         <p class="text-center"> 
             <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="opticalGain"</span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
             <label id="opticalGainMaxText">Optical Gain $\mathrm{Max}\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1}{1 - r_1 r_2}\right|$:&nbsp; <span id="opticalGainMax"</span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <label id="FinesseText">Cavity Finesse $\mathcal{F} = \dfrac{\mathrm{FSR}}{\mathrm{FWHM}} \approx \dfrac{-2\pi}{\ln{(r_1^2 r_2^2)}}$:&nbsp; <span id="finesse"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+            <label id="FinesseText">Cavity Finesse $\mathcal{F} = \dfrac{\mathrm{FSR}}{\mathrm{FWHM}} = \dfrac{\pi}{2 \arcsin{\left( \dfrac{1 - r_1 r_2}{2 \sqrt{r_1 r_2}}\right)}}$:&nbsp; <span id="finesse"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
         </p>
         <p id="bothMirrorRefl" class="text-center">
             <label id="mirrorOneText">Mirror One Reflectivity $r_1$:&nbsp; <span id="mirror1refl"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -164,7 +164,7 @@
                         init: 0.3 * cw,
                         width: 100,
                         height: 225,
-                        refl: 0.7
+                        refl: 0.9
                     },
                     mirror2: {
                         left: 0.6 * cw,
@@ -499,7 +499,7 @@
                 var optGainMax = t1/(1.0 - r1 * r2);
                 var phase = k * dist % (2.0 * Math.PI); // removed Math.PI from phase and modulation
                 //var expPhase = math.complex({r: 1.0, phi: 2.0 * k * dist}).re; 
-                var finesse = -2 * Math.PI / Math.log(math.pow(r1, 2) * math.pow(r2, 2)); 
+                var finesse = Math.PI / (2.0 * Math.asin((1.0 - r1 * r2)/(2.0 * Math.sqrt(r1 * r2)))); 
 
                 document.getElementById("cavityLength").innerHTML = (dist).toPrecision(4); 
                 document.getElementById("opticalGain").innerHTML = (optGain).toPrecision(4); 

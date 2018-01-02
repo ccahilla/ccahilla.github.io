@@ -59,7 +59,7 @@
         <h1 id="titleText" class="text-center">Fabry-Perot Optical Cavity</h1>
         <p>
             &nbsp;&nbsp;&nbsp;&nbsp;A laser is incident on two aligned mirrors. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths; small mirror motions will move the optics off resonance and phase-shift light out of the interferometer arm cavities.
         </p>
         <h4 id="headerText" class="text-center">
              Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
@@ -78,7 +78,7 @@
     </div>
     
     <div class="text-center">
-        <canvas id="c" margin=0px>
+        <canvas id="c">
             This text is displayed if your browser does not support HTML5 canvas
         </canvas>
     </div>
@@ -102,7 +102,7 @@
         <p>
             &nbsp;&nbsp;&nbsp;&nbsp;The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.  Light reflected off the cavity $E_\mathrm{refl}$ moves left and creates a standing wave with the incident light.
             <br>&nbsp;&nbsp;&nbsp;&nbsp;If $r_1 > r_2$, the cavity is <i>under-coupled</i>.  If $r_1 < r_2$, the cavity is <i>over-coupled</i>.  If $r_1 = r_2$, the cavity is <i>critically-coupled</i>.  Critically-coupled cavities have the unintuitive property that when the round-trip cavity length is equal to an integer number of laser wavelengths, $2 L = n \lambda$, all light incident on the cavity is fully transmitted: no light is reflected at all.  This is due to interference: all light that would be reflected destructively interferes with itself, leaving only transmitted light.
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;The LIGO interferometer uses over-coupled cavities for it's arms, with reflectivities $r_1^2 = 98.6$% and $r_2^2 = 99.9999$% to enhance the amount of light resonanting in the arms. 
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;The LIGO interferometer has over-coupled cavities for arms, with reflectivities $r_1^2 = 98.6$% and $r_2^2 = 99.9999$% enhancing the light resonanting in the arms. 
         </p>
     </div>
 
@@ -118,8 +118,8 @@
             };
             
             // Color computed text
-            document.getElementById("titleText").style.color = '#FF9999'; 
-            document.getElementById("headerText").style.color = '#FF9999'; 
+            document.getElementById("titleText").style.color = '#E57254'; 
+            document.getElementById("headerText").style.color = '#E57254'; 
             
             document.getElementById("cavityLengthText").style.color = '#99CCFF';
             document.getElementById("wavenumberText").style.color = '#99CCFF';

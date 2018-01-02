@@ -57,42 +57,56 @@
 <body>
     <div class="container">
         <h1 id="titleText" class="text-center">Fabry-Perot Optical Cavity</h1>
-        <p>
+        <p class="text-center">
             A laser is incident on two aligned mirrors. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
             <br> In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths, as small motions will move the optics off resonance and will phase-shift light out of its arm cavities.
         </p>
         <h4 id="headerText" class="text-center">
              Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
         </h4>
-        <p class="text-center">
-            The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.  Light reflected off the cavity $E_\mathrm{refl}$ is destructively interfering when the cavity is locked.
-        </p>
-        <p class="text-center"> 
-            <label id="cavityLengthText">Cavity Length $L$:&nbsp; <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
-            <label id="wavenumberText">Wavenumber $k = \dfrac{2 \pi}{\lambda}$:&nbsp; <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
-            <label id="phaseText">Phase $\phi = k L \,\, \mathrm{mod}\,\, 2\pi$:&nbsp; <span id="laserPhase"></span></label>
-        </p>
-        <p class="text-center"> 
-            <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="opticalGain"</span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <label id="opticalGainMaxText">Optical Gain $\mathrm{Max}\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1}{1 - r_1 r_2}\right|$:&nbsp; <span id="opticalGainMax"</span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <label id="FinesseText">Cavity Finesse $\mathcal{F} = \dfrac{\mathrm{FSR}}{\mathrm{FWHM}} = \dfrac{\pi}{2 \arcsin{\left( \dfrac{1 - r_1 r_2}{2 \sqrt{r_1 r_2}}\right)}}$:&nbsp; <span id="finesse"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-        </p>
         <p id="bothMirrorRefl" class="text-center">
             <label id="mirrorOneText">Mirror One Reflectivity $r_1$:&nbsp; <span id="mirror1refl"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label id="mirrorTwoText">Mirror Two Reflectivity $r_2$:&nbsp; <span id="mirror2refl"></span></label>
         </p>
         <div class="slidecontainer">
             <p class="text-center">
-                <input id="MirrorOneReflectivity" type="range" class="slider" min=0 max=1.0 step=0.01 value=0.7 > &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="MirrorOneReflectivity" type="range" class="slider" min=0 max=1.0 step=0.01 value=0.9 > &nbsp;&nbsp;&nbsp;&nbsp;
                 <input id="MirrorTwoReflectivity" type="range" class="slider" min=0 max=1.0 step=0.01 value=0.9 >
             </p>
         </div>
         <button type="button" class="btn btn-info btn-block" onclick="lockCavity()" id="lockerButton">Lock Cavity</button>
- 
-        <canvas id="c" style="width: 100%; height: 100%; border: 1px dashed black">
+    </div>
+    
+    <div class="text-center">
+        <canvas id="c" margin=0px>
             This text is displayed if your browser does not support HTML5 canvas
         </canvas>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </div>
+
+    <div class="container">
+        <p class="text-center"> 
+            <label id="cavityLengthText">Cavity Length $L$:&nbsp; <span id="cavityLength"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label id="wavenumberText">Wavenumber $k = \dfrac{2 \pi}{\lambda}$:&nbsp; <span id="laserWavenumber"></span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+            <label id="phaseText">Phase $\phi = k L \,\, \mathrm{mod}\,\, 2\pi$:&nbsp; <span id="laserPhase"></span></label>
+            <br>
+            <label id="opticalGainText">Optical Gain $\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="opticalGain"</span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <label id="opticalGainMaxText">Optical Gain $\mathrm{Max}\left|\dfrac{E_\mathrm{circ}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1}{1 - r_1 r_2}\right|$:&nbsp; <span id="opticalGainMax"</span></label>
+            <br>
+            <label id="reflText">Reflected Gain $\left|\dfrac{E_\mathrm{refl}}{E_\mathrm{inc}}\right| = \left|\dfrac{-r_1 + r_2 e^{2 i k L}}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="reflGain"</span></label> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <label id="transText">Transmitted Gain $\left|\dfrac{E_\mathrm{trans}}{E_\mathrm{inc}}\right| = \left|\dfrac{t_1 t_2 e^{i k L}}{1 - r_1 r_2 e^{2 i k L}}\right|$:&nbsp; <span id="transGain"</span></label>
+            <br>
+            <label id="finesseText">Cavity Finesse $\mathcal{F} = \dfrac{\mathrm{FSR}}{\mathrm{FWHM}} = \dfrac{\pi}{2 \arcsin{\left( \dfrac{1 - r_1 r_2}{2 \sqrt{r_1 r_2}}\right)}}$:&nbsp; <span id="finesse"></span></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label id="cavityCouplingText">The cavity is <i><span id="cavityCoupling"></span></i>.</label> 
+        </p>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+        <p class="text-center">
+            The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.  Light reflected off the cavity $E_\mathrm{refl}$ moves left and creates a standing wave with the incident light.<br>
+            If $r_1 > r_2$, the cavity is <i>under-coupled</i>.  If $r_1 < r_2$, the cavity is <i>over-coupled</i>.  If $r_1 = r_2$, the cavity is <i>critically-coupled</i>.  Critically-coupled cavities have the unintuitive property that when the round-trip cavity length is equal to an integer number of laser wavelengths, $2 L = n \lambda$, all light incident on the cavity is fully transmitted: no light is reflected at all.  This is due to interference: all light that would be reflected destructively interferes with itself, leaving only transmitted light.<br>
+            The LIGO interferometer uses over-coupled cavities for it's arms, with reflectivities $r_1^2 = 94$% and $r_2^2 = 99.9999$% to enhance the amount of light resonanting in the arms. 
+        </p>
+    </div>
+
+    <div class="text-center">
         <script type="text/javascript">
             String.prototype.format = String.prototype.f = function() {
                 var str = this,
@@ -110,42 +124,27 @@
             document.getElementById("cavityLengthText").style.color = '#99CCFF';
             document.getElementById("wavenumberText").style.color = '#99CCFF';
             document.getElementById("phaseText").style.color = '#99CCFF';
-            //document.getElementById("opticalGainText").style.color = '#99CCFF';
             
+            document.getElementById("opticalGainText").style.color = '#FFDD99';
+            document.getElementById("opticalGainMaxText").style.color = '#FFDD99';
+            
+            document.getElementById("reflText").style.color = '#52D273';
+            document.getElementById("transText").style.color = '#52D273';
+            
+            document.getElementById("finesseText").style.color = '#E57254'; 
+            document.getElementById("cavityCouplingText").style.color = '#C0C0C0';
+
             document.getElementById("mirrorOneText").style.color = '#FFDD99';
             document.getElementById("mirrorTwoText").style.color = '#FFDD99';
-            
-            
-            // Sliders 
-            var slider1 = document.getElementById("MirrorOneReflectivity");
-            var slider2 = document.getElementById("MirrorTwoReflectivity");
-            var output1 = document.getElementById("mirror1refl");
-            var output2 = document.getElementById("mirror2refl");
-            output1.innerHTML = slider1.value;
-            output2.innerHTML = slider2.value;
-            
-            var r1 = slider1.defaultValue; 
-            var r2 = slider2.defaultValue; 
-            var t1 = Math.sqrt(1.0 - Math.pow(r1, 2)); 
-            var t2 = Math.sqrt(1.0 - Math.pow(r2, 2)); // define reflectivities and transmissions
-
-            slider1.oninput = function() {
-                output1.innerHTML = this.value;
-                r1 = this.value;
-                t1 = Math.sqrt(1.0 - Math.pow(r1, 2));
-            }
-            slider2.oninput = function() {
-                output2.innerHTML = this.value;
-                r2 = this.value;
-                t2 = Math.sqrt(1.0 - Math.pow(r2, 2));            
-            }
-            
+           
+            var widthScale = 0.97;
+            var heightScale = 0.4; 
             var c = document.getElementById('c'),
                 ctx = c.getContext('2d'),
-                cw = ctx.canvas.width = window.innerWidth,
-                ch = ctx.canvas.height = window.innerHeight,
-                //cw = ctx.canvas.width,
-                //ch = ctx.canvas.height,
+                cw = ctx.canvas.width  = Math.round(widthScale  * window.innerWidth),
+                ch = ctx.canvas.height = Math.round(heightScale * window.innerHeight),
+                //cw = window.innerWidth,
+                //ch = window.innerHeight,
                 points = [],
                 tick = 0,
                 opt = {
@@ -181,11 +180,35 @@
                     thickness: 4,
                     radius: 1,
                     strokeColor: '#e50000',
-                    level: 0.25,
-                    scaler: 1.3,
+                    level: 0.5,
+                    scaler: 1.0,
                     curved: true
                 };
+ 
+            // Sliders 
+            var slider1 = document.getElementById("MirrorOneReflectivity");
+            var slider2 = document.getElementById("MirrorTwoReflectivity");
+            var output1 = document.getElementById("mirror1refl");
+            var output2 = document.getElementById("mirror2refl");
+            output1.innerHTML = slider1.value;
+            output2.innerHTML = slider2.value;
+            
+            var r1 = slider1.defaultValue = opt.mirror1.refl; 
+            var r2 = slider2.defaultValue = opt.mirror2.refl; 
+            var t1 = Math.sqrt(1.0 - Math.pow(r1, 2)); 
+            var t2 = Math.sqrt(1.0 - Math.pow(r2, 2)); // define reflectivities and transmissions
 
+            slider1.oninput = function() {
+                output1.innerHTML = this.value;
+                r1 = this.value;
+                t1 = Math.sqrt(1.0 - Math.pow(r1, 2));
+            }
+            slider2.oninput = function() {
+                output2.innerHTML = this.value;
+                r2 = this.value;
+                t2 = Math.sqrt(1.0 - Math.pow(r2, 2));            
+            }
+             
             ctx.lineJoin = 'round';
             ctx.lineWidth = opt.thickness;
             ctx.strokeStyle = opt.strokeColor;
@@ -500,13 +523,37 @@
                 var phase = k * dist % (2.0 * Math.PI); // removed Math.PI from phase and modulation
                 //var expPhase = math.complex({r: 1.0, phi: 2.0 * k * dist}).re; 
                 var finesse = Math.PI / (2.0 * Math.asin((1.0 - r1 * r2)/(2.0 * Math.sqrt(r1 * r2)))); 
+                var reflGain = E3h.abs();
+                var transGain = E4h.abs();
 
+                if (optGain < 0.0000001) {
+                    optGain = 0;
+                }
+                if (reflGain < 0.0000001) {
+                    reflGain = 0;
+                }
+                if (transGain < 0.0000001) {
+                    transGain = 0;
+                }
+                
+                var cavityCoupling;
+                if (Math.abs(r1 - r2) < 0.0001) {
+                    cavityCoupling = "critically-coupled";
+                } else if ( r1 - r2 > 0.0) {
+                    cavityCoupling = "under-coupled";
+                } else {
+                    cavityCoupling = "over-coupled";
+                }
+                
                 document.getElementById("cavityLength").innerHTML = (dist).toPrecision(4); 
                 document.getElementById("opticalGain").innerHTML = (optGain).toPrecision(4); 
                 document.getElementById("opticalGainMax").innerHTML = (optGainMax).toPrecision(4); 
                 document.getElementById("laserWavenumber").innerHTML = (k).toPrecision(3); 
                 document.getElementById("laserPhase").innerHTML = (phase).toPrecision(4);  
                 document.getElementById("finesse").innerHTML = (finesse).toPrecision(4);  
+                document.getElementById("cavityCoupling").innerHTML = cavityCoupling;  
+                document.getElementById("reflGain").innerHTML = (reflGain).toPrecision(4);  
+                document.getElementById("transGain").innerHTML = (transGain).toPrecision(4);  
             };
 
             var lockCavity = function() {
@@ -568,6 +615,9 @@
                 //clear();
                 window.requestAnimFrame(loop, c);
                 tick++;
+                if (tick > 100000) {
+                    tick = 0;
+                }
                 computeElectricFields();
                 updatePoints();
                 renderShape();
@@ -596,6 +646,9 @@
             var k = opt.wavenumber; 
             init();
             loop();
-        </script>
+        </script> 
+    </div>
+    <div class="container">
+    
     </div>
 </body>

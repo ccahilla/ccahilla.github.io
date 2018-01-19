@@ -349,7 +349,9 @@
                 canvas.addEventListener('mouseup', function(e) {
                     myState.dragging = false;
                 }, true);
-                
+               
+                // Added mobile touch support from this truly excellent site:
+                // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html 
                 // Prevent scrolling when touching the canvas
                 document.body.addEventListener("touchstart", function (e) {
                   if (e.target == canvas) {
@@ -508,8 +510,8 @@
 
             Point.prototype.update = function() {
                 // incident light E0 going right and E0m going left 
-                var E0  = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * (this.x - mirror1front)});
-                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * (this.x - mirror1front)});
+                var E0  = math.complex({r: opt.amplitude, phi: opt.freq * tick - k * (this.x - mirror1front) + Math.PI / 2.0});
+                var E0m = math.complex({r: opt.amplitude, phi: opt.freq * tick + k * (this.x - mirror1front) - Math.PI / 2.0});
                 var E3 = math.multiply(E0m, E3h); // refl 
                 var E1 = math.multiply(E0, E1h);  // cavity right
                 var E2 = math.multiply(E0m, E2h); // cavity left

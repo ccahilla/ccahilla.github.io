@@ -67,10 +67,7 @@
 <body>
     <div class="container">
         <h1 id="titleText" class="text-center">Fabry-Perot Optical Cavity</h1>
-        <p>
-            &nbsp;&nbsp;&nbsp;&nbsp;A laser is incident on two aligned mirrors. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths; small mirror motions will move the optics off resonance and phase-shift light out of the interferometer arm cavities.
-        </p>
+
         <h4 id="headerText" class="text-center">
              Move the mirrors below around to try and lock the Fabry-Perot cavity!  The larger the optical gain, the better!
         </h4>
@@ -85,6 +82,10 @@
             </p>
         </div>
         <button type="button" class="btn btn-info btn-block" onclick="lockCavity()" id="lockerButton">Lock Cavity</button>
+        <div class="text-center">
+            <br>
+            <h2 id="cavityLockedText">&nbsp;<span id="cavityLocked"></span></h2> 
+        </div>
     </div>
     
     <div class="text-center">
@@ -110,6 +111,10 @@
         </p>
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
         <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;A laser is incident on two aligned mirrors. If the optics are an integer number of laser wavelengths away from one another, the laser will constructively interfere inside the optical cavity. This constructive interference amplifies the laser power in the cavity.
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;In LIGO, both four kilometer long arms consist of Fabry-Perot cavities. When the LIGO detector arms achieve laser power amplification, the arms are "on resonance" or "locked". A locked LIGO detector is hyper-sensitive to minute motions in its arm lengths; small mirror motions will move the optics off resonance and phase-shift light out of the interferometer arm cavities.
+        </p>       
+        <p>
             &nbsp;&nbsp;&nbsp;&nbsp;The incident light $E_\mathrm{inc}$ comes into the cavity from the left.  At the correct cavity length, the light circulating $E_\mathrm{circ}$ is constructively interfering.  Light exits the cavity in transmission $E_\mathrm{trans}$ out the right.  Light reflected off the cavity $E_\mathrm{refl}$ moves left and creates a standing wave with the incident light.
             <br>&nbsp;&nbsp;&nbsp;&nbsp;If $r_1 > r_2$, the cavity is <i>under-coupled</i>.  If $r_1 < r_2$, the cavity is <i>over-coupled</i>.  If $r_1 = r_2$, the cavity is <i>critically-coupled</i>.  Critically-coupled cavities have the unintuitive property that when the round-trip cavity length is equal to an integer number of laser wavelengths, $2 L = n \lambda$, all light incident on the cavity is fully transmitted: no light is reflected at all.  This is due to interference: all light that would be reflected destructively interferes with itself, leaving only transmitted light.
             <br>&nbsp;&nbsp;&nbsp;&nbsp;The LIGO interferometer has over-coupled cavities for arms, with reflectivities $r_1^2 = 98.6$% and $r_2^2 = 99.9999$% enhancing the light resonanting in the arms. 
@@ -130,6 +135,7 @@
             // Color computed text
             document.getElementById("titleText").style.color = '#E57254'; 
             document.getElementById("headerText").style.color = '#E57254'; 
+            document.getElementById("cavityLockedText").style.color = '#CC0000'; 
             
             document.getElementById("cavityLengthText").style.color = '#99CCFF';
             document.getElementById("wavenumberText").style.color = '#99CCFF';
@@ -148,7 +154,8 @@
             document.getElementById("mirrorTwoText").style.color = '#FFDD99';
            
             var widthScale = 0.97;
-            var heightScale = 0.4; 
+            var heightScale = 0.4;
+            var isLocked; 
             var c = document.getElementById('c'),
                 ctx = c.getContext('2d'),
                 cw = ctx.canvas.width  = Math.round(widthScale  * window.innerWidth),
@@ -219,7 +226,7 @@
                 t2 = Math.sqrt(1.0 - Math.pow(r2, 2));            
             }
              
-            ctx.lineJoin = 'round';
+            ctx.lineJoin = '';
             ctx.lineWidth = opt.thickness;
             ctx.strokeStyle = opt.strokeColor;
 
@@ -601,8 +608,19 @@
                 } else {
                     cavityCoupling = "over-coupled";
                 }
-                
+
+                 // Find closest resonance k*L/pi mod 1 === 0
+                var phaseOffset = k * dist / Math.PI; // Ideally, this should be an integer, but probably isn't.
+                var phaseResonance = Math.round(phaseOffset); // round to the nearest int
+                var phaseResidual = phaseOffset - phaseResonance;
+                if (Math.abs(phaseResidual) < 0.0000001) {
+                    cavityLockedText = "Cavity Locked!";
+                } else {
+                    cavityLockedText = "&nbsp;";
+                }
+               
                 document.getElementById("cavityLength").innerHTML = (dist).toPrecision(4); 
+                document.getElementById("cavityLockedText").innerHTML = cavityLockedText; 
                 document.getElementById("opticalGain").innerHTML = (optGain).toPrecision(4); 
                 document.getElementById("opticalGainMax").innerHTML = (optGainMax).toPrecision(4); 
                 document.getElementById("laserWavenumber").innerHTML = (k).toPrecision(3); 

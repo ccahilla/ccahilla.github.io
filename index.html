@@ -6,7 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="bootstrap.min.css">
     </head>
-    <body>
+    <body onload="lastModified()">
+    <script>
+        function lastModified() {
+            var x = document.lastModified;
+            document.getElementById("lastDate").innerHTML = x;
+        }
+    </script>
     <div class="container">
 
         <h1 class="text-center">Craig Cahillane</h1>
@@ -16,8 +22,9 @@
         </p>
         <p>
             <label>Current Research</label>
-            <br> 
-            I run the Coatings Thermal Noise laser optics lab at Caltech.  We are investigating coatings thermal noise for AlGaAs coatings using two 3.68 cm Fabry-Perot optical cavities.  This work is imperative for lowering the thermal noise in next-generation gravitational-wave detectors, increasing their sensitivity to gravitational-waves from binary black holes and neutron stars.
+            <br>
+            I am currently a LIGO Science Collaboration Fellow at LIGO Hanford Observatory.  I am working on feedforward of control signals from some interferometer degrees of freedom to others for reduced noise in DARM, the degree of freedom most important for detecting gravitational waves.  I am also thinking about laser frequency noise in the interferometer, in particular the CARM control loop which is responsible for making LIGO the most stable laser in the world.<br /> 
+            Additionally, while at Caltech I run the Coatings Thermal Noise laser optics lab under Professor Adhikari.  We are investigating coatings thermal noise for AlGaAs coatings using two 3.68 cm Fabry-Perot optical cavities.  AlGaAs is a candidate optical coating for next-generation gravitational-wave detector optics, so characterization of its thermal noise properties is required for the future of gravitational wave astronomy. 
         </p>
         <p>
             <label>Current Residence:</label> Pasadena, California
@@ -93,7 +100,11 @@
         
         <br>
         <br>
-        <p>Created by Craig Cahillane, Last updated 2018 January 3</p>
+        
+        <p>
+            Created by Craig Cahillane<br />
+            Last Updated: <span id="lastDate"></span>
+        </p>
     </div>
     </body>
 </html>

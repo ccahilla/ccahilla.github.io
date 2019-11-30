@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="bootstrap.min.css">
-    </head>
-    <body onload="lastModified()">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body onload="lastModified()">
     <script>
         function lastModified() {
             var x = document.lastModified;
@@ -17,65 +19,75 @@
 
         <h1 class="text-center">Craig Cahillane</h1>
         <p class="text-center">
-            4th Year Physics Grad Student at <img src="figures/Caltech.png" alt="Caltech" style="width:82px;height:20px;"><br> 
-            Work in Experimental Gravity for<img src="figures/LIGOLogo.jpg" alt="LIGO Logo" style="width:42px;height:30px;"> the Laser Interferometer Gravitational wave Observatory.         
+            Sixth Year Physics Grad Student at <img src="figures/Caltech.png" alt="Caltech Logo" style="width:62px;height:15px;">
+            <br> Work in Experimental Gravity for<img src="figures/LIGOLogo.jpg" alt="LIGO Logo" style="width:42px;height:30px;">
+            <br> ccahilla@caltech.edu
         </p>
         <p>
-            <label>Current Research</label>
-            <br>
-            I am currently a LIGO Science Collaboration Fellow at LIGO Hanford Observatory.  I am working on feedforward of control signals from some interferometer degrees of freedom to others for reduced noise in DARM, the degree of freedom most important for detecting gravitational waves.  I am also thinking about laser frequency noise in the interferometer, in particular the CARM control loop which is responsible for making LIGO the most stable laser in the world.<br /> 
-            Additionally, while at Caltech I run the Coatings Thermal Noise laser optics lab under Professor Adhikari.  We are investigating coatings thermal noise for AlGaAs coatings using two 3.68 cm Fabry-Perot optical cavities.  AlGaAs is a candidate optical coating for next-generation gravitational-wave detector optics, so characterization of its thermal noise properties is required for the future of gravitational wave astronomy. 
-        </p>
-        <p>
-            <label>Current Residence:</label> Pasadena, California
-        </p>
-        <p>
-            <label>Hometown:</label> Rockford, Illinois
-        </p>
-        <p>
-            <label>Born:</label> Honolulu, Hawaii
-        </p>
-        <p>
-            <label>Alma Mater:</label> <img src="figures/NotreDameLogo.png" alt="Notre Dame Logo" style="width:22px;height:20px;"> 
-  Notre Dame 2014. 
-            Graduated with degrees in Physics and Computer Science.
-        </p>
-        <p>
-            <label>Programming Languages and Skills</label>
+            <label>Research</label>
+            <br> I am currently a graduate student at Caltech, started August 2014. 
+            <br> Worked as a commissioner of the Advanced LIGO Hanford Gravitational-Wave Observatory intermittently for a total of two years.
+            <br> Focused on modeling laser frequency and intensity control systems for lower noise masking the gravitational-wave signal.
             <br> 
-            Tier 1: Python, C/C++, MATLAB, Unix
-            <br> 
-            Tier 2: Javascript, Git
+            <br> Additionally, while at Caltech I run the Coatings Thermal Noise laser optics lab under Professor Adhikari. We are investigating coatings thermal noise for AlGaAs coatings using two 3.68 cm Fabry-Perot optical cavities. AlGaAs is a candidate optical coating for next-generation gravitational-wave detector optics, so characterization of its thermal noise properties is required for the future of gravitational wave astronomy.
         </p>
         <p>
-            <label>Electronics Experience</label>
-            <br>
-            Spectrum Analyzers: SR785, Agilent A4395A, HP8560E
-            <br>
-            Oscilloscopes: Tektronics 3032 and 3034
-            <br>
-            Skills: Soldering, Circuit Design, Control Systems, Optics, General Lab Management
+            <label>Alma Mater:</label> <img src="figures/NotreDameLogo.png" alt="Notre Dame Logo" style="width:22px;height:20px;"> Notre Dame. Graduated 2014. Degrees in Physics and Computer Science.  3.795 GPA
         </p>
         <p>
-            <label>Machining Experience</label>
-            <br>
-            Passed Caltech Machine Shop Course ME113
-            <br>
-            Trained on the Lathe, Mill, Bandsaw, Drillpress, Laser Printer, 3D Printer, and Waterjet.
+            <label>Programming Languages and Computing</label>
+            <br> Python, C/C++, MATLAB, Unix, Javascript, Git, LaTeX
+            <br> Interferometer simulation <a href="http://www.gwoptics.org/finesse/">Finesse</a>
+            <br> Linear Simulation and Optimization of analog electronic circuits <a href="http://www2.mpq.mpg.de/~ros/geo600_docu/soft/liso/manual.pdf">LISO</a>
         </p>
         <p>
-            <label>Outreach:</label> 2015-2017 LIGO Outreach Lead.
-            <br>
-            Organized ~15 trips to local elementary and high schools, and even more talks to schools out of state, including Notre Dame. 
-            <br>
-            Developed new outreach demonstrations, including the <a href="blackholedemo.html">Black Hole Merger Demonstration</a> which simulates gravitational wave emission from black hole binaries near the end of their lives.
-            <br>
-            I created an <a href="fabryperot.html">interactive Fabry-Perot optical cavity</a> to visualize how lasers and mirrors interact in a simple two-mirror resonator. 
+            <label>Optics</label>
+            <br> Worked in the Caltech coatings thermal noise lab. 
+            <br> Locked two lasers' frequencies to two Fabry-Perot cavity lengths with the goal of measuring cavity mirror coatings Brownian noise.
+            <br> Mode matching, polarization, mode cleaning, laser intensity control, laser frequency control, cavity temperature control
         </p>
         <p>
-            <label>Interests:</label> Cosmoslogy, Astrophysics, Lasers, Optics, Control Systems, Golf, Tennis, Frisbee, Notre Dame Football, Arduino, Raspberry Pi 
+            <label>Electronics</label>
+            <br> Spectrum Analyzers: SR785, Agilent A4395A, HP8560E
+            <br> Oscilloscopes: Tektronics 3032 and 3034
+            <br> RF Generator: Marconi 2023A
+            <br> Preamplifiers: SR560
+            <br> GPIB: Developed python scripts to acquire data, monitor, and control lab electronics in real time.
+            <br> Soldering, Circuit design and noise analysis, Control systems, Optics
+        </p>
+        <p>
+            <label>Machining</label>
+            <br> Passed Caltech Machine Shop Course ME113
+            <br> Trained on the Lathe, Mill, Bandsaw, Drillpress, Laser Printer, 3D Printer, and Waterjet.
+        </p>
+        <p>
+            <label>Outreach</label> 2015-2017 LIGO Caltech Outreach Lead.
+            <br> Organized ~15 trips to local elementary and high schools, and even more talks to schools out of state, including Notre Dame.
+            <br> <a href="blackholedemo.html">Black Hole Merger Demonstration</a>.  Simulates gravitational wave emission from black hole binaries near the end of their lives.
+            <br> <a href="fabryperot.html">Interactive Fabry-Perot optical cavity</a>.  Visualizes how lasers and mirrors interact in a simple two-mirror resonator.
+        </p>
+        <p>
+            <label>Interests:</label> Lasers, Optics, Control Systems, Cosmoslogy, Astrophysics, Arduino, Raspberry Pi, Golf, Tennis, Frisbee, Notre Dame Football
         </p>
 
+        <h2>Publications:</h2>
+        <p>First Author:
+            <br> <a href="https://doi.org/10.1103/PhysRevD.96.102001">Calibration Uncertainty for Advanced LIGO's First and Second Observing Runs</a>
+            <a href="https://arxiv.org/abs/1708.03023">(arXiv version)</a>
+        </p>
+        <p>Contributing Author:
+            <br> <a href="https://arxiv.org/abs/1712.09719">Systematic calibration error requirements for gravitational-wave detectors via the Cramér-Rao bound</a>
+        </p>
+        <p>In Prep:
+            <br> <a href="https://git.ligo.org/o3commissioning/o3-commissioning-paper/">Sensitivity and Performance of the Advanced LIGO Detectors in the Third Observing Run</a>
+            <br> <a href="https://git.ligo.org/3gfrequencynoise/3gfn-paper">Frequency Noise for Third-Generation Gravitational Wave Detectors</a>
+        </p>
+        <br>
+        <p>Full Collaboration Papers:
+            <br>
+            <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.119.161101">GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral</a> First direct detection of gravitational waves from a neutron star binary.
+            <br> <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102">Observation of Gravitational Waves from a Binary Black Hole Merger</a> First detection of gravitational waves.
+        </p>
 
         <h2>Links:</h2>
         <a href="shot.html">Shot Noise Calculator</a>
@@ -83,9 +95,9 @@
         <a href="noise.html">Latest Coatings Thermal Noise Budget in my lab at Caltech</a>
         <br>
         <a href="fabryperot.html">Interactive Fabry-Perot Optical Cavity Animation in Javascript</a>
-        <br> 
+        <br>
         <a href="alcohol-tracker/index.html">Blood Alcohol Content Estimator in React</a>
-        
+
         <h2>Interactive Plot Gallery:</h2>
         <a href="lho_noisebudget.svg">LIGO Hanford Noisebudget Interactive SVG</a>
         <br>
@@ -93,27 +105,14 @@
         <br>
         <a href="Analog_OUT2_vs_REFL_SERVO_ERR.svg">Analog OUT2 vs REFL SERVO ERR SVG</a>
 
+        <br>
+        <br>
 
-        <h2>Publications:</h2>
-        <p>First Author:<br>
-        <a href="https://doi.org/10.1103/PhysRevD.96.102001">Calibration Uncertainty for Advanced LIGO's First and Second Observing Runs</a>
-        <a href="https://arxiv.org/abs/1708.03023">(arXiv version)</a>
-        </p>
-        <br>
-        <p>Full Collaboration Papers:<br>
-        <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.119.161101">GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral</a>
-        <br>
-        <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102">Observation of Gravitational Waves from a Binary Black Hole Merger</a>
-        </p>
-
-        
-        <br>
-        <br>
-        
         <p>
-            Created by Craig Cahillane<br />
-            Last Updated: <span id="lastDate"></span>
+            Created by Craig Cahillane
+            <br /> Last Updated: <span id="lastDate"></span>
         </p>
     </div>
-    </body>
+</body>
+
 </html>

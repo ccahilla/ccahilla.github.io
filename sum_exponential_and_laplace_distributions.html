@@ -1,0 +1,336 @@
+<!DOCTYPE html><html>
+<head>
+<title>Sum of exponential and laplace distributions</title>
+<!--Generated on Tue Jun 16 18:24:59 2020 by LaTeXML (version 0.8.4) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on June 16, 2020.-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Sum of exponential and laplace distributions</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Craig Cahillane
+</span></span>
+</div>
+<div class="ltx_date ltx_role_creation">June 16, 2020</div>
+
+<div id="p1" class="ltx_para">
+<p class="ltx_p">I proved the following result while working on my thesis.
+The result turned out to be not relevant to my thesis,
+but I wanted to record the result here since working through it was instructive.</p>
+</div>
+<div id="p2" class="ltx_para">
+<p class="ltx_p">Suppose we have two independent random variables <math id="p2.m1" class="ltx_Math" alttext="\mathcal{X}\sim\mathrm{Exp}(\lambda)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>∼</mo><mrow><mi>Exp</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math> and <math id="p2.m2" class="ltx_Math" alttext="\mathcal{Y}\sim\mathrm{Laplace}(\mu=0,\gamma)" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒴</mi><mo>∼</mo><mi>Laplace</mi><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow></mrow></math>.
+Let <math id="p2.m3" class="ltx_Math" alttext="\mathcal{Z}=\mathcal{X}+\mathcal{Y}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒵</mi><mo>=</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>+</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi></mrow></mrow></math>.
+What is the probability density function <math id="p2.m4" class="ltx_Math" alttext="f_{\mathcal{Z}}(z)" display="inline"><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math> of <math id="p2.m5" class="ltx_Math" alttext="\mathcal{Z}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒵</mi></math>?</p>
+</div>
+<div id="p3" class="ltx_para">
+<p class="ltx_p"><math id="p3.m1" class="ltx_Math" alttext="\mathrm{Exp}(\lambda)" display="inline"><mrow><mi>Exp</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo></mrow></mrow></math> is the exponential distribution, defined such that <math id="p3.m2" class="ltx_Math" alttext="\lambda" display="inline"><mi>λ</mi></math> is its mean:</p>
+<table id="S0.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E1.m1" class="ltx_Math" alttext="\displaystyle\mathrm{Exp}(\lambda)=f_{\mathcal{X}}(x)=\dfrac{1}{\lambda}e^{-%
+\frac{x}{\lambda}}\qquad x\in[0,\infty)" display="inline"><mrow><mrow><mrow><mi>Exp</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒳</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>λ</mi></mfrac></mstyle><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup></mrow></mrow><mo mathvariant="italic" separator="true">  </mo><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">where <math id="p3.m3" class="ltx_Math" alttext="f_{\mathcal{X}}" display="inline"><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒳</mi></msub></math> is the probability density function (PDF), and <math id="p3.m4" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math> is the parameter of <math id="p3.m5" class="ltx_Math" alttext="\mathcal{X}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒳</mi></math>.</p>
+</div>
+<div id="p4" class="ltx_para">
+<p class="ltx_p"><math id="p4.m1" class="ltx_Math" alttext="\mathrm{Laplace}(\mu=0,\gamma)" display="inline"><mrow><mi>Laplace</mi><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow></mrow></math> is the laplace distribution, with its mean <math id="p4.m2" class="ltx_Math" alttext="\mu" display="inline"><mi>μ</mi></math> defined to be zero and scale parameter <math id="p4.m3" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>:</p>
+<table id="S0.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E2.m1" class="ltx_Math" alttext="\displaystyle\mathrm{Laplace}(\mu,\gamma)=f_{\mathcal{Y}}(y)=\dfrac{1}{2\gamma%
+}e^{-\frac{|y-\mu|}{\gamma}}\qquad y\in(\infty,\infty)" display="inline"><mrow><mrow><mrow><mi>Laplace</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>μ</mi><mo>,</mo><mi>γ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mrow><mo stretchy="false">|</mo><mrow><mi>y</mi><mo>-</mo><mi>μ</mi></mrow><mo stretchy="false">|</mo></mrow><mi>γ</mi></mfrac></mrow></msup></mrow></mrow><mo mathvariant="italic" separator="true">  </mo><mrow><mi>y</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="p5" class="ltx_para">
+<p class="ltx_p">Since <math id="p5.m1" class="ltx_Math" alttext="\mathcal{X},\mathcal{Y}" display="inline"><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi></mrow></math> are independent,
+we can define the joint probability distribution <math id="p5.m2" class="ltx_Math" alttext="f_{\mathcal{X}\mathcal{Y}}(x,y)" display="inline"><mrow><msub><mi>f</mi><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math> as the product of the two PDFs:</p>
+<table id="S0.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E3.m1" class="ltx_Math" alttext="\displaystyle f_{\mathcal{X}\mathcal{Y}}(x,y)" display="inline"><mrow><msub><mi>f</mi><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E3.m2" class="ltx_Math" alttext="\displaystyle=f_{\mathcal{X}}(x)f_{\mathcal{Y}}(y)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒳</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+<tbody id="S0.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E4.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda\gamma}e^{-\frac{x}{\lambda}}e^{-\frac{|y|}{%
+\gamma}}\qquad x\in[0,\infty)\quad y\in(\infty,\infty)" display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mrow><mo stretchy="false">|</mo><mi>y</mi><mo stretchy="false">|</mo></mrow><mi>γ</mi></mfrac></mrow></msup></mrow></mrow><mo mathvariant="italic" separator="true">  </mo><mrow><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow><mo mathvariant="italic" separator="true"> </mo><mrow><mi>y</mi><mo>∈</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="p6" class="ltx_para">
+<p class="ltx_p">We will start with the cumulative distribution function (CDF) <math id="p6.m1" class="ltx_Math" alttext="F_{\mathcal{Z}}(z)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math>.
+The CDF is defined as the probability that the random variable <math id="p6.m2" class="ltx_Math" alttext="\mathcal{Z}" display="inline"><mi class="ltx_font_mathcaligraphic">𝒵</mi></math> takes a value that is less than <math id="p6.m3" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>: <math id="p6.m4" class="ltx_Math" alttext="F_{\mathcal{Z}}(z)=P(\mathcal{Z}&lt;z)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒵</mi><mo>&lt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math>.
+Since as <math id="p6.m5" class="ltx_Math" alttext="z\rightarrow\infty" display="inline"><mrow><mi>z</mi><mo>→</mo><mi mathvariant="normal">∞</mi></mrow></math> all values must be less than <math id="p6.m6" class="ltx_Math" alttext="z" display="inline"><mi>z</mi></math>, <math id="p6.m7" class="ltx_Math" alttext="F_{\mathcal{Z}}(z)\rightarrow 1" display="inline"><mrow><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>→</mo><mn>1</mn></mrow></math>,
+and we can write <math id="p6.m8" class="ltx_Math" alttext="F_{\mathcal{Z}}(z)=1-P(\mathcal{Z}\geq z)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo>=</mo><mn>1</mn><mo>-</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒵</mi><mo>≥</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math>.
+Recall that the PDF is equal to the derivative of the CDF: <math id="p6.m9" class="ltx_Math" alttext="f_{\mathcal{Z}}=\dfrac{dF_{\mathcal{Z}}}{dz}" display="inline"><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>d</mi><mo>⁢</mo><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub></mrow><mrow><mi>d</mi><mo>⁢</mo><mi>z</mi></mrow></mfrac></mstyle></mrow></math>.</p>
+</div>
+<div id="p7" class="ltx_para">
+<p class="ltx_p">We split the solution into parts.
+The first part is finding <math id="p7.m1" class="ltx_Math" alttext="F_{\mathcal{Z}}(z)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math> for <math id="p7.m2" class="ltx_Math" alttext="z&lt;0" display="inline"><mrow><mi>z</mi><mo>&lt;</mo><mn>0</mn></mrow></math>.
+The only way for <math id="p7.m3" class="ltx_Math" alttext="z=x+y&lt;0" display="inline"><mrow><mi>z</mi><mo>=</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo>&lt;</mo><mn>0</mn></mrow></math> to be less than zero is if <math id="p7.m4" class="ltx_Math" alttext="y&lt;-x" display="inline"><mrow><mi>y</mi><mo>&lt;</mo><mrow><mo>-</mo><mi>x</mi></mrow></mrow></math>, because <math id="p7.m5" class="ltx_Math" alttext="x\in[0,\infty)" display="inline"><mrow><mi>x</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></math>.
+Also, since we know <math id="p7.m6" class="ltx_Math" alttext="y&lt;0" display="inline"><mrow><mi>y</mi><mo>&lt;</mo><mn>0</mn></mrow></math>, we can write <math id="p7.m7" class="ltx_Math" alttext="|y|=-y" display="inline"><mrow><mrow><mo stretchy="false">|</mo><mi>y</mi><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo>-</mo><mi>y</mi></mrow></mrow></math> for the joint probability distribution.
+Thus we have</p>
+<table id="S0.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.Ex1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex1.m1" class="ltx_Math" alttext="\displaystyle F_{\mathcal{Z}}(z&lt;0)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>&lt;</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex1.m2" class="ltx_Math" alttext="\displaystyle=P(x+y&lt;z)" display="inline"><mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo>&lt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex2.m2" class="ltx_Math" alttext="\displaystyle=P(y&lt;z-x)" display="inline"><mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&lt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex3.m2" class="ltx_Math" alttext="\displaystyle=\int_{0}^{\infty}dx\int_{-\infty}^{z-x}dy\,f_{\mathcal{X}%
+\mathcal{Y}}(x,y)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mo>-</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msub><mi>f</mi><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>⁢</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex4.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda\gamma}\int_{0}^{\infty}dx\int_{-\infty}^{z-x}%
+dy\,e^{-\frac{x}{\lambda}}e^{\frac{y}{\gamma}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mo>-</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mfrac><mi>y</mi><mi>γ</mi></mfrac></msup></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex5.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{e^{\frac{z}{\gamma}}}{2\lambda}\int_{0}^{\infty}dxe^{-%
+\frac{x(\lambda+\gamma)}{\gamma\lambda}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><msup><mi>e</mi><mfrac><mi>z</mi><mi>γ</mi></mfrac></msup><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mrow><mi>x</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>+</mo><mi>γ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>λ</mi></mrow></mfrac></mrow></msup></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E5.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{\gamma e^{\frac{z}{\gamma}}}{2(\lambda+\gamma)}\qquad z%
+\in[0,\infty)" display="inline"><mrow><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>γ</mi><mo>⁢</mo><msup><mi>e</mi><mfrac><mi>z</mi><mi>γ</mi></mfrac></msup></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>+</mo><mi>γ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow><mo mathvariant="italic" separator="true">  </mo><mrow><mi>z</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">This concludes the first part, <math id="p7.m8" class="ltx_Math" alttext="z&lt;0" display="inline"><mrow><mi>z</mi><mo>&lt;</mo><mn>0</mn></mrow></math>.</p>
+</div>
+<div id="p8" class="ltx_para">
+<p class="ltx_p">The second part is finding <math id="p8.m1" class="ltx_Math" alttext="F_{\mathcal{Z}}(z)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math> for <math id="p8.m2" class="ltx_Math" alttext="z&gt;0" display="inline"><mrow><mi>z</mi><mo>&gt;</mo><mn>0</mn></mrow></math>.</p>
+<table id="S0.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.Ex6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex6.m1" class="ltx_Math" alttext="\displaystyle F_{\mathcal{Z}}(z&gt;0)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex6.m2" class="ltx_Math" alttext="\displaystyle=P(x+y&lt;z)" display="inline"><mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo>&lt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex7.m2" class="ltx_Math" alttext="\displaystyle=1-P(x+y&gt;z)" display="inline"><mrow><mo>=</mo><mn>1</mn><mo>-</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex8.m2" class="ltx_Math" alttext="\displaystyle=1-P(y&gt;z-x)" display="inline"><mrow><mo>=</mo><mn>1</mn><mo>-</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E6.m2" class="ltx_Math" alttext="\displaystyle=1-\dfrac{1}{2\lambda\gamma}\int_{0}^{\infty}dx\int_{z-x}^{\infty%
+}dy\,e^{-\frac{x}{\lambda}}e^{\frac{|y|}{\gamma}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mn>1</mn><mo>-</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mfrac><mrow><mo stretchy="false">|</mo><mi>y</mi><mo stretchy="false">|</mo></mrow><mi>γ</mi></mfrac></msup></mrow></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">There are two ways for <math id="p8.m3" class="ltx_Math" alttext="z=x+y&gt;0" display="inline"><mrow><mi>z</mi><mo>=</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow></math>: <math id="p8.m4" class="ltx_Math" alttext="y&lt;0" display="inline"><mrow><mi>y</mi><mo>&lt;</mo><mn>0</mn></mrow></math> but <math id="p8.m5" class="ltx_Math" alttext="x&gt;-y" display="inline"><mrow><mi>x</mi><mo>&gt;</mo><mrow><mo>-</mo><mi>y</mi></mrow></mrow></math>, and simply <math id="p8.m6" class="ltx_Math" alttext="y&gt;0" display="inline"><mrow><mi>y</mi><mo>&gt;</mo><mn>0</mn></mrow></math>.
+The difficultly lies in the change in PDF <math id="p8.m7" class="ltx_Math" alttext="f_{\mathcal{Y}}" display="inline"><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub></math> at <math id="p8.m8" class="ltx_Math" alttext="y=0" display="inline"><mrow><mi>y</mi><mo>=</mo><mn>0</mn></mrow></math>.
+We will split this integral into two more parts: <math id="p8.m9" class="ltx_Math" alttext="x&gt;z" display="inline"><mrow><mi>x</mi><mo>&gt;</mo><mi>z</mi></mrow></math> and <math id="p8.m10" class="ltx_Math" alttext="x&lt;z" display="inline"><mrow><mi>x</mi><mo>&lt;</mo><mi>z</mi></mrow></math>, at which point we will switch between PDFs.</p>
+</div>
+<div id="p9" class="ltx_para">
+<p class="ltx_p">First, let <math id="p9.m1" class="ltx_Math" alttext="x&gt;z" display="inline"><mrow><mi>x</mi><mo>&gt;</mo><mi>z</mi></mrow></math>.
+Then we have the sum of two integrals, one with <math id="p9.m2" class="ltx_Math" alttext="f_{\mathcal{Y}}(y&lt;0)" display="inline"><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&lt;</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math> and the other with <math id="p9.m3" class="ltx_Math" alttext="f_{\mathcal{Y}}(y&gt;0)" display="inline"><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math>:</p>
+<table id="S0.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.Ex10"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex10.m1" class="ltx_Math" alttext="\displaystyle P(y&gt;z-x|x&gt;z)" display="inline"><mrow><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>&gt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex10.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda\gamma}\int_{z}^{\infty}dx\int_{z-x}^{\infty}%
+dy\,e^{-\frac{x}{\lambda}}e^{\frac{|y|}{\gamma}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mi>z</mi><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mfrac><mrow><mo stretchy="false">|</mo><mi>y</mi><mo stretchy="false">|</mo></mrow><mi>γ</mi></mfrac></msup></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex11.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda\gamma}\int_{z}^{\infty}dx\left[\int_{z-x}^{0}%
+dy\,e^{-\frac{x}{\lambda}}e^{\frac{y}{\gamma}}+\int_{0}^{\infty}dy\,e^{-\frac{%
+x}{\lambda}}e^{-\frac{y}{\gamma}}\right]" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mi>z</mi><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mo>[</mo><mrow><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow><mn>0</mn></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mfrac><mi>y</mi><mi>γ</mi></mfrac></msup></mrow></mrow><mo>+</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>y</mi><mi>γ</mi></mfrac></mrow></msup></mrow></mrow></mrow><mo>]</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex12"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex12.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda}\int_{z}^{\infty}dx\left[e^{-x\left(\frac{1}{%
+\gamma}+\frac{1}{\lambda}\right)}\left(e^{x/\gamma}-e^{z/\gamma}\right)+e^{-%
+\frac{x}{\lambda}}\right]" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mi>z</mi><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mo>[</mo><mrow><mrow><msup><mi>e</mi><mrow><mo>-</mo><mrow><mi>x</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mfrac><mn>1</mn><mi>γ</mi></mfrac><mo>+</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></msup><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>e</mi><mrow><mi>x</mi><mo>/</mo><mi>γ</mi></mrow></msup><mo>-</mo><msup><mi>e</mi><mrow><mi>z</mi><mo>/</mo><mi>γ</mi></mrow></msup></mrow><mo>)</mo></mrow></mrow><mo>+</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mo>]</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex13"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex13.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda}\int_{z}^{\infty}dx\left[e^{-x\left(\frac{1}{%
+\gamma}+\frac{1}{\lambda}\right)}\left(2e^{x/\gamma}-e^{z/\gamma}\right)\right]" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mi>z</mi><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mo>[</mo><mrow><msup><mi>e</mi><mrow><mo>-</mo><mrow><mi>x</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mfrac><mn>1</mn><mi>γ</mi></mfrac><mo>+</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac></mrow><mo>)</mo></mrow></mrow></mrow></msup><mo>⁢</mo><mrow><mo>(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><msup><mi>e</mi><mrow><mi>x</mi><mo>/</mo><mi>γ</mi></mrow></msup></mrow><mo>-</mo><msup><mi>e</mi><mrow><mi>z</mi><mo>/</mo><mi>γ</mi></mrow></msup></mrow><mo>)</mo></mrow></mrow><mo>]</mo></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E8.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{(\gamma+2\lambda)e^{-\frac{z}{\lambda}}}{2(\gamma+\lambda)}" display="inline"><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>+</mo><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>+</mo><mi>λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="p10" class="ltx_para">
+<p class="ltx_p">Second, let <math id="p10.m1" class="ltx_Math" alttext="x&lt;z" display="inline"><mrow><mi>x</mi><mo>&lt;</mo><mi>z</mi></mrow></math>.
+Now for <math id="p10.m2" class="ltx_Math" alttext="z&gt;x+y" display="inline"><mrow><mi>z</mi><mo>&gt;</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow></mrow></math>, <math id="p10.m3" class="ltx_Math" alttext="y&gt;0" display="inline"><mrow><mi>y</mi><mo>&gt;</mo><mn>0</mn></mrow></math>, so we can just consider <math id="p10.m4" class="ltx_Math" alttext="f_{\mathcal{Y}}(y&gt;0)" display="inline"><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math>:</p>
+<table id="S0.EGx7" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.Ex15"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex15.m1" class="ltx_Math" alttext="\displaystyle P(y&gt;z-x|x&lt;z)" display="inline"><mrow><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>&lt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex15.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda\gamma}\int_{0}^{z}dx\int_{z-x}^{\infty}dy\,e^%
+{-\frac{x}{\lambda}}e^{\frac{|y|}{\gamma}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi>z</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mfrac><mrow><mo stretchy="false">|</mo><mi>y</mi><mo stretchy="false">|</mo></mrow><mi>γ</mi></mfrac></msup></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex16.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda\gamma}\int_{0}^{z}dx\int_{z-x}^{\infty}dy\,e^%
+{-\frac{x}{\lambda}}e^{-\frac{y}{\gamma}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi><mo>⁢</mo><mi>γ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi>z</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mrow><mi>z</mi><mo>-</mo><mi>x</mi></mrow><mi mathvariant="normal">∞</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mpadded width="+1.7pt"><mi>y</mi></mpadded></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac></mrow></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>y</mi><mi>γ</mi></mfrac></mrow></msup></mrow></mrow></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex17"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex17.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{1}{2\lambda}\int_{0}^{z}dxe^{\frac{x}{\gamma}-\frac{x}{%
+\lambda}-\frac{z}{\gamma}}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mfrac></mstyle><mo>⁢</mo><mrow><mstyle displaystyle="true"><msubsup><mo largeop="true" symmetric="true">∫</mo><mn>0</mn><mi>z</mi></msubsup></mstyle><mrow><mrow><mo rspace="0pt">𝑑</mo><mi>x</mi></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mfrac><mi>x</mi><mi>γ</mi></mfrac><mo>-</mo><mfrac><mi>x</mi><mi>λ</mi></mfrac><mo>-</mo><mfrac><mi>z</mi><mi>γ</mi></mfrac></mrow></msup></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E9"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E9.m2" class="ltx_Math" alttext="\displaystyle=\dfrac{\gamma\left(e^{-\frac{z}{\gamma}}-e^{-\frac{z}{\lambda}}%
+\right)}{2(\gamma-\lambda)}" display="inline"><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>γ</mi></mfrac></mrow></msup><mo>-</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mo>)</mo></mrow></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>-</mo><mi>λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="p11" class="ltx_para">
+<p class="ltx_p">Summing Eqs. <a href="#S0.Ex10" title="Sum of exponential and laplace distributions" class="ltx_ref"><span class="ltx_text ltx_ref_title">Sum of exponential and laplace distributions</span></a> and <a href="#S0.Ex15" title="Sum of exponential and laplace distributions" class="ltx_ref"><span class="ltx_text ltx_ref_title">Sum of exponential and laplace distributions</span></a>:</p>
+<table id="S0.EGx8" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.Ex18"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.Ex18.m1" class="ltx_Math" alttext="\displaystyle F_{\mathcal{Z}}(z&gt;0)" display="inline"><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>&gt;</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex18.m2" class="ltx_Math" alttext="\displaystyle=1-P(y&gt;z-x)" display="inline"><mrow><mo>=</mo><mn>1</mn><mo>-</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex19"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex19.m2" class="ltx_Math" alttext="\displaystyle=1-P(y&gt;z-x|x&gt;z)+P(y&gt;z-x|x&lt;z)" display="inline"><mrow><mo>=</mo><mn>1</mn><mo>-</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>&gt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="false">(</mo><mi>y</mi><mo>&gt;</mo><mi>z</mi><mo>-</mo><mi>x</mi><mo stretchy="false">|</mo><mi>x</mi><mo>&lt;</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.Ex20"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.Ex20.m2" class="ltx_Math" alttext="\displaystyle=1-\dfrac{(\gamma+2\lambda)e^{-\frac{z}{\lambda}}}{2(\gamma+%
+\lambda)}-\dfrac{\gamma\left(e^{-\frac{z}{\gamma}}-e^{-\frac{z}{\lambda}}%
+\right)}{2(\gamma-\lambda)}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mn>1</mn><mo>-</mo><mstyle displaystyle="true"><mfrac><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>+</mo><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mrow><mo stretchy="false">)</mo></mrow><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>+</mo><mi>λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle><mo>-</mo><mstyle displaystyle="true"><mfrac><mrow><mi>γ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>γ</mi></mfrac></mrow></msup><mo>-</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mo>)</mo></mrow></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>-</mo><mi>λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S0.E10"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E10.m2" class="ltx_Math" alttext="\displaystyle=1+\dfrac{\lambda^{2}e^{-\frac{z}{\lambda}}}{\gamma^{2}-\lambda^{%
+2}}-\dfrac{\gamma e^{-\frac{z}{\gamma}}}{2(\gamma-\lambda)}\qquad z\in[0,\infty]" display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mn>1</mn><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>λ</mi><mn>2</mn></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mrow><msup><mi>γ</mi><mn>2</mn></msup><mo>-</mo><msup><mi>λ</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow><mo>-</mo><mstyle displaystyle="true"><mfrac><mrow><mi>γ</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>γ</mi></mfrac></mrow></msup></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>-</mo><mi>λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow><mo mathvariant="italic" separator="true">  </mo><mrow><mi>z</mi><mo>∈</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">This concludes the second part, <math id="p11.m1" class="ltx_Math" alttext="z&gt;0" display="inline"><mrow><mi>z</mi><mo>&gt;</mo><mn>0</mn></mrow></math>.</p>
+</div>
+<div id="p12" class="ltx_para">
+<p class="ltx_p">Thus the total CDF is given by</p>
+<table id="S0.EGx9" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E11.m1" class="ltx_Math" alttext="\displaystyle F_{\mathcal{Z}}(z)=\left\{\begin{array}[]{ll}\dfrac{\gamma e^{%
+\frac{z}{\gamma}}}{2(\lambda+\gamma)}&amp;\qquad z&lt;0\\
+1+\dfrac{\lambda^{2}e^{-\frac{z}{\lambda}}}{\gamma^{2}-\lambda^{2}}-\dfrac{%
+\gamma e^{-\frac{z}{\gamma}}}{2(\gamma-\lambda)}&amp;\qquad z\geq 0\end{array}\right." display="inline"><mrow><mrow><msub><mi>F</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" rowspacing="0pt"><mtr><mtd columnalign="left"><mstyle displaystyle="true"><mfrac><mrow><mi>γ</mi><mo>⁢</mo><msup><mi>e</mi><mfrac><mi>z</mi><mi>γ</mi></mfrac></msup></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>+</mo><mi>γ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mtd><mtd columnalign="left"><mrow><mpadded lspace="20pt" width="+20pt"><mi>z</mi></mpadded><mo>&lt;</mo><mn>0</mn></mrow></mtd></mtr><mtr><mtd columnalign="left"><mrow><mrow><mn>1</mn><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><msup><mi>λ</mi><mn>2</mn></msup><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mrow><msup><mi>γ</mi><mn>2</mn></msup><mo>-</mo><msup><mi>λ</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow><mo>-</mo><mstyle displaystyle="true"><mfrac><mrow><mi>γ</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>γ</mi></mfrac></mrow></msup></mrow><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>γ</mi><mo>-</mo><mi>λ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mrow></mtd><mtd columnalign="left"><mrow><mpadded lspace="20pt" width="+20pt"><mi>z</mi></mpadded><mo>≥</mo><mn>0</mn></mrow></mtd></mtr></mtable><mi></mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(11)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="p13" class="ltx_para">
+<p class="ltx_p">Taking the derivative of <a href="#S0.E11" title="(11) ‣ Sum of exponential and laplace distributions" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a> gives the PDF <math id="p13.m1" class="ltx_Math" alttext="f_{\mathcal{Z}}(z)" display="inline"><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></math>:</p>
+<table id="S0.EGx10" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E12"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E12.m1" class="ltx_Math" alttext="\displaystyle f_{\mathcal{Z}}(z)=\left\{\begin{array}[]{ll}\dfrac{e^{\frac{z}{%
+\gamma}}}{2(\lambda+\gamma)}&amp;\qquad z&lt;0\\
+\dfrac{\lambda e^{-\frac{z}{\lambda}}}{\lambda^{2}-\gamma^{2}}+\dfrac{e^{-%
+\frac{z}{\gamma}}}{2\gamma-2\lambda}&amp;\qquad z\geq 0\end{array}\right." display="inline"><mrow><mrow><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" rowspacing="0pt"><mtr><mtd columnalign="left"><mstyle displaystyle="true"><mfrac><msup><mi>e</mi><mfrac><mi>z</mi><mi>γ</mi></mfrac></msup><mrow><mn>2</mn><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mi>λ</mi><mo>+</mo><mi>γ</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mstyle></mtd><mtd columnalign="left"><mrow><mpadded lspace="20pt" width="+20pt"><mi>z</mi></mpadded><mo>&lt;</mo><mn>0</mn></mrow></mtd></mtr><mtr><mtd columnalign="left"><mrow><mstyle displaystyle="true"><mfrac><mrow><mi>λ</mi><mo>⁢</mo><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>λ</mi></mfrac></mrow></msup></mrow><mrow><msup><mi>λ</mi><mn>2</mn></msup><mo>-</mo><msup><mi>γ</mi><mn>2</mn></msup></mrow></mfrac></mstyle><mo>+</mo><mstyle displaystyle="true"><mfrac><msup><mi>e</mi><mrow><mo>-</mo><mfrac><mi>z</mi><mi>γ</mi></mfrac></mrow></msup><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>γ</mi></mrow><mo>-</mo><mrow><mn>2</mn><mo>⁢</mo><mi>λ</mi></mrow></mrow></mfrac></mstyle></mrow></mtd><mtd columnalign="left"><mrow><mpadded lspace="20pt" width="+20pt"><mi>z</mi></mpadded><mo>≥</mo><mn>0</mn></mrow></mtd></mtr></mtable><mi></mi></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(12)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">These formula can be seen as the brown and pink dashed curves in Figure <a href="#S0.F1" title="Figure 1 ‣ Sum of exponential and laplace distributions" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>.</p>
+</div>
+<figure id="S0.F1" class="ltx_figure"><object type="image/svg+xml" data="x1.svg" id="S0.F1.g1" class="ltx_graphics ltx_centering" alt="
+Plot of 1000000 samples from a exponential distribution "></object>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>
+Plot of 1000000 samples from a exponential distribution <math id="S0.F1.m6" class="ltx_Math" alttext="f_{\mathcal{X}}" display="inline"><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒳</mi></msub></math>, laplace distribution <math id="S0.F1.m7" class="ltx_Math" alttext="f_{\mathcal{Y}}" display="inline"><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒴</mi></msub></math>, and their sum <math id="S0.F1.m8" class="ltx_Math" alttext="f_{\mathcal{Z}}" display="inline"><msub><mi>f</mi><mi class="ltx_font_mathcaligraphic">𝒵</mi></msub></math>.
+In this example, <math id="S0.F1.m9" class="ltx_Math" alttext="lambda=32" display="inline"><mrow><mrow><mi>l</mi><mo>⁢</mo><mi>a</mi><mo>⁢</mo><mi>m</mi><mo>⁢</mo><mi>b</mi><mo>⁢</mo><mi>d</mi><mo>⁢</mo><mi>a</mi></mrow><mo>=</mo><mn>32</mn></mrow></math> and <math id="S0.F1.m10" class="ltx_Math" alttext="\gamma=24" display="inline"><mrow><mi>γ</mi><mo>=</mo><mn>24</mn></mrow></math>.
+</figcaption>
+</figure>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Tue Jun 16 18:24:59 2020 by <a href="http://dlmf.nist.gov/LaTeXML/">LaTeXML <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="[LOGO]"></a>
+</div></footer>
+</div>
+</body>
+</html>
